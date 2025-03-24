@@ -1,0 +1,249 @@
+{{ 'section-spotlight-hero.css' | asset_url | append: '?v=2' | stylesheet_tag }}
+{{
+  'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap'
+  | stylesheet_tag
+}}
+
+<div
+  class="spotlight-hero {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+  id="SpotlightHero-{{ section.id }}"
+  style="background-color: {{ section.settings.background_color }};"
+>
+  <div class="spotlight-hero__background">
+    {% if section.settings.background_type == 'image' and section.settings.background_image != blank %}
+      {{
+        section.settings.background_image
+        | image_url: width: 3000
+        | image_tag:
+          loading: 'eager',
+          class: 'spotlight-hero__background-image',
+          sizes: '100vw',
+          widths: '750, 1100, 1500, 2000, 3000'
+      }}
+    {% elsif section.settings.background_type == 'video_url' and section.settings.background_video_url != blank %}
+      <div class="spotlight-hero__background-video-wrapper">
+        <video
+          class="spotlight-hero__background-video"
+          autoplay
+          muted
+          loop
+          playsinline
+        >
+          <source src="{{ section.settings.background_video_url }}" type="video/mp4">
+        </video>
+      </div>
+    {% elsif section.settings.background_type == 'video_library' and section.settings.background_video != blank %}
+      <div class="spotlight-hero__background-video-wrapper">
+        {{
+          section.settings.background_video
+          | video_tag:
+            autoplay: true,
+            loop: true,
+            muted: true,
+            playsinline: true,
+            class: 'spotlight-hero__background-video'
+        }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="spotlight-hero__content">
+    {% if section.settings.show_spotlight %}
+      <div class="spotlight-hero__spotlight">
+        <div class="spotlight-hero__spotlight-beam"></div>
+      </div>
+    {% endif %}
+
+    <div class="spotlight-hero__collection">
+      <div class="spotlight-hero__collection-subtitle">
+        {% if section.settings.collection_subtitle != blank %}
+          {{ section.settings.collection_subtitle | escape }}
+        {% else %}
+          Introducing
+        {% endif %}
+      </div>
+      <div class="spotlight-hero__collection-title">
+        {{ section.settings.collection_title | escape }}
+      </div>
+      {% if section.settings.collection_description != blank %}
+        <div class="spotlight-hero__collection-description">
+          {{ section.settings.collection_description }}
+        </div>
+      {% endif %}
+      {% if section.settings.cta_text != blank %}
+        <div class="spotlight-hero__collection-cta">
+          <a href="{{ section.settings.cta_link }}" class="button button--primary">
+            {{ section.settings.cta_text | escape }}
+            <span class="button-arrow">→</span>
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if section.settings.show_map %}
+    <div class="spotlight-hero__map">
+      <div
+        class="spotlight-hero__topo-map"
+        style="background-image: url({{ section.settings.map_image | image_url: width: 1500 }});"
+      ></div>
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Spotlight Hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#000000"
+    },
+    {
+      "type": "select",
+      "id": "background_type",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "image",
+          "label": "Image"
+        },
+        {
+          "value": "video_url",
+          "label": "Video from URL"
+        },
+        {
+          "value": "video_library",
+          "label": "Video from Media Library"
+        }
+      ],
+      "default": "none",
+      "label": "Background type"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image",
+      "info": "Shown if background type is set to Image"
+    },
+    {
+      "type": "url",
+      "id": "background_video_url",
+      "label": "Background video URL",
+      "info": "Provide a direct link to an MP4 video file. Shown if background type is set to Video from URL"
+    },
+    {
+      "type": "video",
+      "id": "background_video",
+      "label": "Background video",
+      "info": "Select a video from your media library. Shown if background type is set to Video from Media Library"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_spotlight",
+      "default": true,
+      "label": "Show spotlight effect"
+    },
+    {
+      "type": "color",
+      "id": "spotlight_color",
+      "label": "Spotlight color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "spotlight_intensity",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Spotlight intensity",
+      "default": 50
+    },
+    {
+      "type": "text",
+      "id": "collection_subtitle",
+      "default": "Introducing",
+      "label": "Collection subtitle"
+    },
+    {
+      "type": "text",
+      "id": "collection_title",
+      "default": "Collection Title",
+      "label": "Collection title"
+    },
+    {
+      "type": "richtext",
+      "id": "collection_description",
+      "label": "Collection description"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "default": "Shop New Arrivals",
+      "label": "Call to action text"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Call to action link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_map",
+      "default": true,
+      "label": "Show map background"
+    },
+    {
+      "type": "image_picker",
+      "id": "map_image",
+      "label": "Map image"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color scheme"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Spotlight Hero",
+      "settings": {
+        "collection_subtitle": "Introducing",
+        "collection_title": "NEW COLLECTION",
+        "cta_text": "Shop New Arrivals"
+      }
+    }
+  ]
+}
+{% endschema %}

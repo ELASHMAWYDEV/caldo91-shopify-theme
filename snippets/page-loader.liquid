@@ -1,0 +1,190 @@
+{% if settings.enable_page_loader %}
+  {% if settings.enable_loader_animation %}
+    <!-- Include Lottie library if animation is enabled -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js" defer></script>
+  {% endif %}
+
+  <style>
+    .page-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: {{ settings.loader_background }};
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease-out;
+    }
+
+    .page-loader.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .page-loader__logo {
+      max-width: {{ settings.loader_logo_width }}px;
+      height: auto;
+      {% unless settings.enable_loader_animation or settings.loader_logo != blank %}
+        animation: pulse 1.5s infinite ease-in-out;
+      {% endunless %}
+    }
+
+    .page-loader__animation-container {
+      width: {{ settings.loader_logo_width }}px;
+      height: {{ settings.loader_logo_width }}px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .page-loader__animation-container svg {
+      height: {{ settings.loader_logo_width }}px !important;
+      width: auto !important;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    body.page-loaded {
+      overflow: auto;
+    }
+  </style>
+
+  <div class="page-loader" id="pageLoader">
+    {% if settings.enable_loader_animation %}
+      <!-- Lottie Animation Container -->
+      <div id="loader-animation" class="page-loader__animation-container"></div>
+    {% elsif settings.loader_logo != blank %}
+      <!-- Static Logo Image -->
+      <img
+        src="{{ settings.loader_logo | image_url }}"
+        alt="{{ 'general.page_loader.loading' | t }}"
+        class="page-loader__logo"
+        width="{{ settings.loader_logo_width }}"
+        height="auto"
+        loading="eager"
+      >
+    {% else %}
+      <!-- Fallback Text -->
+      <h1 class="page-loader__logo">{{ 'general.page_loader.loading' | t }}</h1>
+    {% endif %}
+  </div>
+
+  <script>
+    // Store the loader viewed state in sessionStorage
+    document.addEventListener('DOMContentLoaded', function() {
+      const hasLoaderBeenViewed = sessionStorage.getItem('loaderViewed');
+      const pageLoader = document.getElementById('pageLoader');
+
+      {% if settings.enable_loader_animation %}
+      // Initialize Lottie animation if enabled
+      if (typeof lottie !== 'undefined' && document.getElementById('loader-animation')) {
+        const animationContainer = document.getElementById('loader-animation');
+
+        // Construct the animation path using Shopify's asset_url filter
+        const animationPath = '/cdn/shop/t/4/assets/caldo91-logo-animation.json';
+
+        // Check if the animation file exists
+        fetch(animationPath, { method: 'HEAD' })
+          .then(response => {
+            if (!response.ok) {
+              console.warn('Animation file not found, animation will not play');
+              return;
+            }
+
+            // Animation file exists, proceed with loading
+            // Clear any existing content
+            animationContainer.innerHTML = '';
+
+            // Load the animation from the external JSON file
+            const animation = lottie.loadAnimation({
+              container: animationContainer,
+              renderer: 'svg',
+              loop: true, // Make it loop while loading
+              autoplay: true, // Autoplay for loader
+              path: animationPath,
+              rendererSettings: {
+                preserveAspectRatio: 'xMidYMid meet',
+                clearCanvas: false,
+                progressiveLoad: true,
+                hideOnTransparent: true
+              }
+            });
+
+            // Set the SVG quality to high
+            animation.setSubframe(false);
+
+            // Add error handling for animation loading
+            animation.addEventListener('data_failed', () => {
+              console.error('Failed to load the logo animation file from:', animationPath);
+            });
+
+            // Apply fixed height to SVG after it's loaded
+            animation.addEventListener('DOMLoaded', () => {
+              // Get the SVG element that Lottie created
+              const svg = animationContainer.querySelector('svg');
+              if (svg) {
+                // Set fixed height and preserve aspect ratio
+                svg.setAttribute('height', '{{ settings.loader_logo_width }}px');
+                svg.style.height = '{{ settings.loader_logo_width }}px';
+                svg.style.width = 'auto';
+              }
+
+              // Set up a mutation observer to ensure the SVG height is maintained
+              // even if Lottie recreates the SVG element during playback
+              const svgObserver = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                  if (mutation.type === 'childList') {
+                    const addedSvg = Array.from(mutation.addedNodes).find(node =>
+                      node.nodeName && node.nodeName.toLowerCase() === 'svg'
+                    );
+                    if (addedSvg) {
+                      // Apply height to newly created SVG
+                      addedSvg.setAttribute('height', '{{ settings.loader_logo_width }}px');
+                      addedSvg.style.height = '{{ settings.loader_logo_width }}px';
+                      addedSvg.style.width = 'auto';
+                    }
+                  }
+                });
+              });
+
+              // Start observing changes to the animation container
+              svgObserver.observe(animationContainer, { childList: true, subtree: true });
+            });
+          })
+          .catch(error => {
+            console.error('Error checking animation file:', error);
+          });
+      } else if (typeof lottie === 'undefined') {
+        console.warn('Lottie library is not loaded, animation will not play');
+      }
+      {% endif %}
+
+      if (hasLoaderBeenViewed) {
+        // If loader has been viewed in this session, remove it immediately
+        pageLoader.parentNode.removeChild(pageLoader);
+        document.body.classList.add('page-loaded');
+      } else {
+        // First time visit, show loader for the specified duration
+        setTimeout(function() {
+          pageLoader.classList.add('hide');
+          document.body.classList.add('page-loaded');
+
+          // After transition is complete, remove loader from DOM
+          setTimeout(function() {
+            pageLoader.parentNode.removeChild(pageLoader);
+          }, 500); // Same as transition duration
+
+          // Set the flag in sessionStorage
+          sessionStorage.setItem('loaderViewed', 'true');
+        }, {{ settings.loader_duration }});
+      }
+    });
+  </script>
+{% endif %}

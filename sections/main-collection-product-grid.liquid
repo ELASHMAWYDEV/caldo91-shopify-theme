@@ -34,6 +34,364 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* Make the product grid take full width and set gap to 15px */
+  #product-grid {
+    width: 100%;
+    max-width: 100%;
+    gap: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  /* Style for grid items */
+  #product-grid .grid__item {
+    margin-top: 0px;
+    margin-bottom: 15px;
+    padding: 0;
+  }
+
+  /* Ensure proper grid columns on desktop and mobile */
+  @media screen and (min-width: 990px) {
+    #product-grid.grid--4-col-desktop .grid__item {
+      width: calc((100% - 45px) / 4);
+      max-width: calc((100% - 45px) / 4);
+      flex: 0 0 calc((100% - 45px) / 4);
+    }
+  }
+
+  @media screen and (max-width: 989px) and (min-width: 750px) {
+    #product-grid.grid--2-col-tablet-down .grid__item {
+      width: calc((100% - 15px) / 2);
+      max-width: calc((100% - 15px) / 2);
+      flex: 0 0 calc((100% - 15px) / 2);
+    }
+  }
+
+  /* Minimal spacing for mobile view */
+  @media screen and (max-width: 749px) {
+    /* Reduce grid gap and padding */
+    #product-grid {
+      gap: 6px;
+      padding-left: 6px;
+      padding-right: 6px;
+    }
+
+    /* Adjust grid item size and spacing */
+    #product-grid.grid--2-col-tablet-down .grid__item {
+      width: calc((100% - 6px) / 2);
+      max-width: calc((100% - 6px) / 2);
+      flex: 0 0 calc((100% - 6px) / 2);
+      margin-bottom: 6px;
+    }
+
+    /* Reduce card padding */
+    .card {
+      padding: 0;
+      margin: 0;
+    }
+
+    .card__inner {
+      padding: 0;
+      margin: 0;
+    }
+
+    /* Minimize spacing in card content */
+    .card__content {
+      padding: 3px 0;
+      margin: 0;
+    }
+
+    .card__information {
+      padding: 3px 0;
+      margin: 0;
+    }
+
+    /* Reduce text spacing */
+    .card__heading {
+      margin-top: 3px;
+      margin-bottom: 3px;
+      font-size: 0.85em;
+      line-height: 1.1;
+    }
+
+    .price__container {
+      margin-top: 2px;
+      margin-bottom: 2px;
+    }
+
+    /* Reduce badge sizes */
+    .card__badge {
+      margin-top: 2px;
+    }
+
+    /* Remove any box shadows */
+    .card, .card__inner, .card__content {
+      box-shadow: none !important;
+    }
+
+    /* Reduce border thicknesses */
+    .card, .card__inner {
+      border-width: 0;
+    }
+
+    /* Minimize section padding */
+    .section-{{ section.id }}-padding {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+    /* Compact product card */
+    .card-wrapper.product-card-wrapper {
+      margin: 0;
+    }
+
+    /* Smaller font for prices */
+    .price, .price__regular, .price__sale {
+      font-size: 0.85em;
+      line-height: 1.1;
+    }
+
+    /* Reduce any padding around images */
+    .card__media, .media {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Reduce pagination wrapper spacing */
+    .pagination-wrapper {
+      padding-left: 6px;
+      padding-right: 6px;
+      margin-top: 8px;
+    }
+
+    /* Reduce space between cards and pagination */
+    .collection {
+      margin-bottom: 6px;
+    }
+
+    /* Minimize facets padding if they're visible */
+    .facets-container {
+      padding: 4px;
+    }
+
+    /* Make loading spinners smaller */
+    .spinner {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    /* Reduce space around badge text */
+    .badge {
+      padding: 0.2rem 0.5rem;
+      font-size: 0.7rem;
+    }
+  }
+
+  /* Center text elements in product cards on desktop */
+  @media screen and (min-width: 750px) {
+    .card__heading {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .card-information {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .price {
+      justify-content: center;
+      display: flex;
+    }
+
+    .price__container {
+      justify-content: center;
+      display: flex;
+    }
+
+    .card__badge {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .caption-with-letter-spacing {
+      text-align: center;
+      width: 100%;
+    }
+
+    .rating {
+      justify-content: center;
+      margin: 0 auto;
+    }
+
+    .rating-text, .rating-count {
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    .card__information-volume-pricing-note {
+      text-align: center;
+      width: 100%;
+    }
+
+    /* Ensure product card information is centered */
+    .card__content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card__information {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Ensure all links in the card are centered */
+    .full-unstyled-link {
+      text-align: center;
+      width: 100%;
+      display: block;
+    }
+  }
+
+  /* Left align text elements in product cards on mobile */
+  @media screen and (max-width: 749px) {
+    .card__heading {
+      text-align: left;
+      margin-left: 0;
+      margin-right: auto;
+    }
+
+    .card-information {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .price {
+      justify-content: flex-start;
+      display: flex;
+    }
+
+    .price__container {
+      justify-content: flex-start;
+      display: flex;
+    }
+
+    .card__badge {
+      display: flex;
+      justify-content: flex-start;
+      width: 100%;
+    }
+
+    .caption-with-letter-spacing {
+      text-align: left;
+      width: 100%;
+    }
+
+    .rating {
+      justify-content: flex-start;
+      margin: 0;
+    }
+
+    .rating-text, .rating-count {
+      text-align: left;
+      margin: 0;
+    }
+
+    .card__information-volume-pricing-note {
+      text-align: left;
+      width: 100%;
+    }
+
+    /* Ensure product card information is left-aligned */
+    .card__content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .card__information {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    /* Ensure all links in the card are left-aligned */
+    .full-unstyled-link {
+      text-align: left;
+      width: 100%;
+      display: block;
+    }
+  }
+
+  /* Remove padding that might constrain the width */
+  .collection {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Ensure the grid container takes full width */
+  .product-grid-container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Full width utility class */
+  .full-width {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Container padding for pagination */
+  .pagination-wrapper {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  /* Ensure product cards fill grid items */
+  .card-wrapper.product-card-wrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .card.card--standard {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .card__inner {
+    width: 100%;
+  }
+
+  /* Common styles for all screen sizes */
+  .card__content {
+    width: 100%;
+  }
+
+  .card__information {
+    width: 100%;
+  }
 {%- endstyle -%}
 
 <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
@@ -97,13 +455,13 @@
       </facet-filters-form>
     {%- endif -%}
 
-    <div class="{% if section.settings.filter_type == 'vertical' %} facets-vertical page-width{% endif %}">
+    <div class="{% if section.settings.filter_type == 'vertical' %} facets-vertical{% endif %} full-width">
       {{ 'component-facets.css' | asset_url | stylesheet_tag }}
       <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
       {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
         <aside
           aria-labelledby="verticalTitle"
-          class="facets-wrapper{% unless section.settings.enable_filtering %} facets-wrapper--no-filters{% endunless %}{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
+          class="facets-wrapper{% unless section.settings.enable_filtering %} facets-wrapper--no-filters{% endunless %} full-width"
           id="main-collection-filters"
           data-id="{{ section.id }}"
         >
@@ -118,7 +476,7 @@
       {%- endif -%}
 
       <div
-        class="product-grid-container{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+        class="product-grid-container{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} full-width"
         id="ProductGridContainer"
         {% if settings.animations_reveal_on_scroll %}
           data-cascade
@@ -140,15 +498,15 @@
           </div>
         {%- else -%}
           <div
-            class="collection{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
+            class="collection"
           >
             <div class="loading-overlay gradient"></div>
             <ul
               id="product-grid"
               data-id="{{ section.id }}"
               class="
-                grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
-                grid--{{ section.settings.columns_desktop }}-col-desktop
+                grid product-grid grid--2-col-tablet-down
+                grid--4-col-desktop
                 {% if section.settings.quick_add == 'bulk' %} collection-quick-add-bulk{% endif %}
               "
             >
@@ -183,7 +541,9 @@
             </ul>
 
             {%- if paginate.pages > 1 -%}
-              {% render 'pagination', paginate: paginate, anchor: '' %}
+              <div class="pagination-wrapper">
+                {% render 'pagination', paginate: paginate, anchor: '' %}
+              </div>
             {%- endif -%}
           </div>
         {%- endif -%}
@@ -233,7 +593,7 @@
           "label": "t:sections.main-collection-product-grid.settings.columns_mobile.options__2.label"
         }
       ]
-    },    
+    },
     {
       "type": "color_scheme",
       "id": "color_scheme",

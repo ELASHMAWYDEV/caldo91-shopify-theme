@@ -1,0 +1,228 @@
+/* Enhance tooltips for section names */
+#fp-nav ul li .fp-tooltip {
+  color: #fff;
+  font-size: 14px;
+  font-family: var(--font-heading-family);
+  padding: 3px 8px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Show tooltip on hover */
+#fp-nav ul li:hover .fp-tooltip {
+  opacity: 1;
+}
+
+/* Adjust navigation container */
+#fp-nav.right {
+  right: 15px;
+}
+
+/* Hide tooltip on mobile but keep it ready for tablets */
+@media (max-width: 480px) {
+  #fp-nav ul li .fp-tooltip {
+    display: none;
+  }
+}
+
+/* Footer section styling - full screen height only on homepage */
+body.template-index .footer-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  height: 100vh !important; /* Ensure full screen height */
+  min-height: 100vh;
+}
+
+body.template-index .footer-container {
+  width: 100%;
+  height: 100%; /* Full height container */
+  display: flex;
+  align-items: center;
+}
+
+body.template-index .footer-section footer {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+/* Remove any transition flicker */
+body.template-index .section {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+}
+/* Custom styles for fullpage.js implementation - only applied to homepage */
+/* Homepage-specific styles */
+body.template-index .fp-section,
+body.template-index .section {
+  height: 100vh !important;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  /* Improved mobile touch/swipe handling */
+  touch-action: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Fix for header z-index */
+body.template-index .header {
+  z-index: 1000;
+}
+
+/* Ensure footer doesn't interfere with full page scrolling */
+body.template-index .footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* Fix for white flash during transitions */
+body.template-index {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #000; /* Set a dark background color to prevent white flash */
+}
+
+body.template-index #MainContent {
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Adjust section spacing */
+body.template-index .shopify-section {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Fix for slides with backgrounds */
+.fp-section.fp-table,
+.fp-slide.fp-table {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.fullpage-wrapper {
+  height: unset !important;
+}
+
+.fp-watermark {
+  display: none !important;
+}
+
+/* Enhanced navigation dots styling */
+#fp-nav ul li a span,
+.fp-slidesNav ul li a span {
+  background: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  border-radius: 50%;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  position: relative;
+  opacity: 0.7;
+}
+
+/* Pulse animation for active dot */
+@keyframes fp-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+/* Custom styles for active navigation dots */
+#fp-nav ul li a.active span,
+.fp-slidesNav ul li a.active span,
+#fp-nav ul li:hover a.active span,
+.fp-slidesNav ul li:hover a.active span {
+  background: #fff;
+  transform: scale(1.3);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+  opacity: 1;
+  animation: fp-pulse 2s infinite;
+}
+
+/* Hover effect for non-active dots */
+#fp-nav ul li:hover a span,
+.fp-slidesNav ul li:hover a span {
+  background: #fff;
+  opacity: 0.9;
+  transform: scale(1.1);
+}
+
+#fp-nav ul li a span,
+.fp-slidesNav ul li a span {
+  width: 10px !important;
+  height: 10px !important;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#fp-nav ul li a.active span,
+.fp-slidesNav ul li a.active span {
+  width: 12px !important;
+  height: 12px !important;
+  background: #fff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8), 0 0 2px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+#fp-nav .fp-sr-only,
+.fp-slidesNav .fp-sr-only {
+  display: none;
+}
+
+/* Adjustments for mobile */
+@media (max-width: 768px) {
+  /* Keep fullpage functionality intact on mobile */
+  body.template-index .section {
+    height: 100vh !important;
+    min-height: 100vh;
+    touch-action: none;
+  }
+
+  body.template-index {
+    overflow: hidden;
+  }
+
+  body.template-index #MainContent {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Keep footer at full height */
+  body.template-index .footer-section {
+    min-height: 100vh !important;
+    height: 100vh !important;
+    display: flex;
+    align-items: center;
+  }
+
+  body.template-index .footer-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Enhanced mobile nav dots - more elegant and touch-friendly */
+  #fp-nav {
+    right: 0px !important; /* Position closer to edge */
+  }
+
+  #fp-nav ul li {
+    margin: 10px 0; /* Add more space between dots */
+  }
+}

@@ -34,6 +34,60 @@
     ]
   },
   {
+    "name": "Page Loader",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Full Page Loader"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_page_loader",
+        "label": "Enable Page Loader",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_loader_animation",
+        "label": "Use Lottie Animation",
+        "default": false,
+        "info": "When enabled, this will use the same logo animation from the header instead of a static logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "loader_logo",
+        "label": "Loader Logo",
+        "info": "Logo to display on the loader screen (not used if animation is enabled)"
+      },
+      {
+        "type": "range",
+        "id": "loader_logo_width",
+        "min": 50,
+        "max": 400,
+        "step": 10,
+        "default": 150,
+        "unit": "px",
+        "label": "Logo/Animation Width"
+      },
+      {
+        "type": "color",
+        "id": "loader_background",
+        "label": "Loader Background Color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "range",
+        "id": "loader_duration",
+        "min": 1000,
+        "max": 5000,
+        "step": 500,
+        "default": 2500,
+        "unit": "ms",
+        "label": "Loader Duration (milliseconds)"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.colors.name",
     "settings": [
       {

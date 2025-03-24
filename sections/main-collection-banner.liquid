@@ -4,25 +4,76 @@
 {%- style -%}
   @media screen and (max-width: 749px) {
     .collection-hero--with-image .collection-hero__inner {
-      padding-bottom: calc({{ settings.media_shadow_vertical_offset | at_least: 0 }}px + 2rem);
+      padding-bottom: calc({{settings.media_shadow_vertical_offset | at_least: 0}}px + 2rem);
     }
+  }
+
+  .collection-hero--full-width .collection-hero__inner {
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .collection-hero__image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+  }
+
+  .collection-hero--with-custom-image .collection-hero__image-container {
+    width: 105vw;
+    height: 20vh;
+    max-height: 350px;
+    margin-left: -1.5vw;
+  }
+
+  .collection-hero--with-custom-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 {%- endstyle -%}
 
-<div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
+<div class="collection-hero{% if section.settings.custom_image != blank %} collection-hero--full-width collection-hero--with-custom-image{% elsif section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
   <div class="collection-hero__inner page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-    <div class="collection-hero__text-wrapper">
-      <h1 class="collection-hero__title">
-        <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
-        {{- collection.title | escape -}}
-      </h1>
+    {% if section.settings.custom_image == blank %}
+      <div class="collection-hero__text-wrapper">
+        <h1 class="collection-hero__title">
+          <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
+          {{- collection.title | escape -}}
+        </h1>
 
-      {%- if section.settings.show_collection_description -%}
-        <div class="collection-hero__description rte">{{ collection.description }}</div>
-      {%- endif -%}
-    </div>
+        {%- if section.settings.show_collection_description -%}
+          <div class="collection-hero__description rte">{{ collection.description }}</div>
+        {%- endif -%}
+      </div>
+    {% endif %}
 
-    {%- if section.settings.show_collection_image and collection.image -%}
+    {%- if section.settings.custom_image != blank -%}
+      <div class="collection-hero__image-container media gradient" style="position: relative;">
+        <div class="collection-hero__image-overlay"></div>
+        <img
+          srcset="
+            {%- if section.settings.custom_image.width >= 165 -%}{{ section.settings.custom_image | image_url: width: 165 }} 165w,{%- endif -%}
+            {%- if section.settings.custom_image.width >= 360 -%}{{ section.settings.custom_image | image_url: width: 360 }} 360w,{%- endif -%}
+            {%- if section.settings.custom_image.width >= 535 -%}{{ section.settings.custom_image | image_url: width: 535 }} 535w,{%- endif -%}
+            {%- if section.settings.custom_image.width >= 750 -%}{{ section.settings.custom_image | image_url: width: 750 }} 750w,{%- endif -%}
+            {%- if section.settings.custom_image.width >= 1070 -%}{{ section.settings.custom_image | image_url: width: 1070 }} 1070w,{%- endif -%}
+            {%- if section.settings.custom_image.width >= 1500 -%}{{ section.settings.custom_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+            {{ section.settings.custom_image | image_url }} {{ section.settings.custom_image.width }}w
+          "
+          src="{{ section.settings.custom_image | image_url: width: 750 }}"
+          sizes="100vw"
+          alt="{{ section.settings.custom_image.alt | escape }}"
+          width="{{ section.settings.custom_image.width }}"
+          height="{{ section.settings.custom_image.height }}"
+          style="z-index: 0;"
+        >
+      </div>
+    {%- elsif section.settings.show_collection_image and collection.image -%}
       <div class="collection-hero__image-container media gradient">
         <img
           srcset="
@@ -64,7 +115,14 @@
       "type": "checkbox",
       "id": "show_collection_image",
       "default": false,
-      "label": "t:sections.main-collection-banner.settings.show_collection_image.label"
+      "label": "t:sections.main-collection-banner.settings.show_collection_image.label",
+      "info": "If a custom image is provided, it will take precedence over the collection image."
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_image",
+      "label": "Custom banner image",
+      "info": "Use this to override the collection's default image"
     },
     {
       "type": "color_scheme",

@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "t:sections.footer.name",
   "type": "footer",
@@ -5,45 +14,83 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "footer-0": {
-          "type": "link_list",
+        "custom_links_VgDDNU": {
+          "type": "custom_links",
           "settings": {
-            "heading": "Quick links",
-            "menu": "footer"
+            "heading": "",
+            "link_1_text": "JACKETS",
+            "link_1_url": "shopify://collections/jackets",
+            "link_2_text": "DENIM",
+            "link_2_url": "shopify://collections/denim",
+            "link_3_text": "HOODIES",
+            "link_3_url": "shopify://collections/hoodies",
+            "link_4_text": "CREW NECK",
+            "link_4_url": "shopify://collections/crew-neck",
+            "link_5_text": "SWEAT PANTS",
+            "link_5_url": "shopify://collections/sweat-pants",
+            "link_6_text": "BAGS",
+            "link_6_url": "shopify://collections/bags",
+            "link_7_text": "",
+            "link_7_url": ""
           }
         },
-        "footer-1": {
-          "type": "link_list",
+        "custom_links_dg4ACD": {
+          "type": "custom_links",
           "settings": {
-            "heading": "Info",
-            "menu": "footer"
+            "heading": "",
+            "link_1_text": "Privacy Policy",
+            "link_1_url": "",
+            "link_2_text": "Terms & Conditions",
+            "link_2_url": "",
+            "link_3_text": "Return Policy",
+            "link_3_url": "",
+            "link_4_text": "Cancellation Policy",
+            "link_4_url": "",
+            "link_5_text": "Refund Policy",
+            "link_5_url": "",
+            "link_6_text": "Delivery Policy",
+            "link_6_url": "",
+            "link_7_text": "",
+            "link_7_url": ""
           }
         },
-        "footer-2": {
-          "type": "text",
+        "custom_links_zMGtDT": {
+          "type": "custom_links",
           "settings": {
-            "heading": "Our mission",
-            "subtext": "<p>Share contact information, store details, and brand content with your customers.<\/p>"
+            "heading": "",
+            "link_1_text": "About",
+            "link_1_url": "shopify://pages/contact",
+            "link_2_text": "Contact Us",
+            "link_2_url": "shopify://pages/contact",
+            "link_3_text": "FAQ",
+            "link_3_url": "",
+            "link_4_text": "",
+            "link_4_url": "",
+            "link_5_text": "",
+            "link_5_url": "",
+            "link_6_text": "",
+            "link_6_url": "",
+            "link_7_text": "",
+            "link_7_url": ""
           }
         }
       },
       "block_order": [
-        "footer-0",
-        "footer-1",
-        "footer-2"
+        "custom_links_VgDDNU",
+        "custom_links_dg4ACD",
+        "custom_links_zMGtDT"
       ],
       "settings": {
-        "color_scheme": "scheme-1",
-        "newsletter_enable": true,
-        "newsletter_heading": "Subscribe to our emails",
-        "show_social": true,
-        "enable_country_selector": false,
-        "enable_language_selector": false,
-        "payment_enable": true,
-        "show_policy": false,
-        "margin_top": 48,
+        "logo": "shopify://shop_images/Caldo91-Logo.svg",
+        "copyright_text": "2025 All Rights Reserved | Caldo91",
+        "show_payment_icons": true,
+        "visa_icon": "shopify://shop_images/Caldo91_Visa.png",
+        "mastercard_icon": "shopify://shop_images/Caldo91_Mastercard.png",
+        "show_social_icons": true,
+        "margin_top": 0,
         "padding_top": 36,
-        "padding_bottom": 36
+        "padding_bottom": 36,
+        "color_scheme": "scheme-1"
       }
     }
   },

@@ -1,210 +1,105 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Image banner",
-            "heading_size": "h0"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "Give customers details about the banner image(s) or content on the template.",
-            "text_style": "body"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ],
+    "spotlight_hero": {
+      "type": "spotlight-hero",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
+        "background_color": "#000000",
+        "background_type": "video_library",
+        "background_image": "shopify://shop_images/home-image-1.jpg",
+        "background_video_url": "",
+        "background_video": "shopify://files/videos/home-video-1.mp4",
+        "show_spotlight": true,
+        "spotlight_color": "#ffffff",
+        "spotlight_intensity": 60,
+        "collection_subtitle": "Introducing",
+        "collection_title": "EARTH COLLECTION",
+        "collection_description": "",
+        "cta_text": "Shop New Arrivals",
+        "cta_link": "/collections/all",
+        "show_map": true,
+        "color_scheme": "accent-1"
+      }
+    },
+    "full_screen_image": {
+      "type": "full-screen-image",
+      "settings": {
+        "image": "shopify://shop_images/Home_Image_1_Optimized.jpg",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
         "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
         "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "image_overlay_color": "#000000",
+        "image_overlay_opacity": 0,
+        "color_scheme": "inverse"
       }
     },
-    "rich_text": {
-      "type": "rich-text",
+    "multi_image_scroll_section": {
+      "type": "multi-image-scroll-section",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "block_1": {
+          "type": "image_with_title",
           "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "h1"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>"
+            "image": "shopify://shop_images/showcase-home-1.jpg",
+            "title": "EARTH COLLECTION",
+            "link": "/collections/all",
+            "link_text": "Shop Now"
           }
         }
       },
       "block_order": [
-        "heading",
-        "text"
+        "block_1"
       ],
       "settings": {
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 0
+        "image_overlay_color": "#000000",
+        "image_overlay_opacity": 30
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "show_view_all": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "columns_mobile": "2",
-        "padding_top": 28,
-        "padding_bottom": 36
-      }
-    },
-    "collage": {
-      "type": "collage",
+    "dual_product_showcase": {
+      "type": "dual-product-showcase",
       "blocks": {
-        "collection-0": {
-          "type": "collection",
+        "custom_image1": {
+          "type": "custom_image",
           "settings": {
-            "collection": ""
+            "image": "shopify://shop_images/showcase-home-1.jpg",
+            "hide_details": true,
+            "title": "Featured Collection",
+            "text": "Discover our latest designs crafted with premium materials",
+            "button_label": "Shop Now",
+            "button_link": "/collections/all"
           }
         },
-        "product": {
-          "type": "product",
+        "custom_image_9MmJKX": {
+          "type": "custom_image",
           "settings": {
-            "product": "",
-            "second_image": false
-          }
-        },
-        "collection-1": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
+            "image": "shopify://shop_images/showcase-home-2.jpg",
+            "hide_details": true,
+            "title": "Image title",
+            "text": "Pair text with an image to focus on your chosen product, collection, or blog post.",
+            "button_label": "Learn more",
+            "button_link": ""
           }
         }
       },
       "block_order": [
-        "collection-0",
-        "product",
-        "collection-1"
+        "custom_image1",
+        "custom_image_9MmJKX"
       ],
-      "settings": {
-        "heading": "Multimedia collage",
-        "heading_size": "h2",
-        "desktop_layout": "left",
-        "mobile_layout": "collage",
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "video": {
-      "type": "video",
-      "settings": {
-        "heading": "",
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "heading_size": "h1",
-        "description": "",
-        "full_width": false,
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "multicolumn": {
-      "type": "multicolumn",
-      "blocks": {
-        "column1": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column2": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column3": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "column1",
-        "column2",
-        "column3"
-      ],
-      "settings": {
-        "title": "",
-        "heading_size": "h1",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "columns_desktop": 3,
-        "column_alignment": "center",
-        "background_style": "none",
-        "button_label": "",
-        "button_link": "",
-        "swipe_on_mobile": false,
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
+      "settings": {}
     }
   },
   "order": [
-    "image_banner",
-    "rich_text",
-    "featured_collection",
-    "collage",
-    "video",
-    "multicolumn"
+    "spotlight_hero",
+    "full_screen_image",
+    "multi_image_scroll_section",
+    "dual_product_showcase"
   ]
 }

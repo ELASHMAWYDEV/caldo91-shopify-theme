@@ -1,0 +1,25 @@
+{
+  "name": "caldo91-theme",
+  "version": "1.0.0",
+  "description": "Caldo91 Shopify Theme",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "shopify theme dev --store=caldo91.myshopify.com",
+    "dev:prev": "shopify theme dev --store=caldo91.myshopify.com",
+    "push": "shopify theme push --store=caldo91.myshopify.com",
+    "pull": "shopify theme pull --store=caldo91.myshopify.com",
+    "check": "shopify theme check",
+    "serve": "shopify theme serve",
+    "preview": "shopify theme preview --store=caldo91.myshopify.com"
+  },
+  "keywords": [
+    "shopify",
+    "theme"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+} 

@@ -1,0 +1,177 @@
+{{ 'section-dual-product-showcase.css' | asset_url | stylesheet_tag }}
+
+<div class="dual-product-showcase">
+  {% for block in section.blocks %}
+    {% if block.type == 'product' and block.settings.product != blank %}
+      {% assign product = block.settings.product %}
+      <div class="dual-product-showcase__item" {{ block.shopify_attributes }}>
+        <div class="dual-product-showcase__image-wrapper">
+          {% if product.featured_media != blank %}
+            <img
+              srcset="
+                {% if product.featured_media.width >= 165 %}{{ product.featured_media | image_url: width: 165 }} 165w,{% endif %}
+                {% if product.featured_media.width >= 360 %}{{ product.featured_media | image_url: width: 360 }} 360w,{% endif %}
+                {% if product.featured_media.width >= 533 %}{{ product.featured_media | image_url: width: 533 }} 533w,{% endif %}
+                {% if product.featured_media.width >= 720 %}{{ product.featured_media | image_url: width: 720 }} 720w,{% endif %}
+                {% if product.featured_media.width >= 940 %}{{ product.featured_media | image_url: width: 940 }} 940w,{% endif %}
+                {% if product.featured_media.width >= 1066 %}{{ product.featured_media | image_url: width: 1066 }} 1066w,{% endif %}
+                {{ product.featured_media | image_url }} {{ product.featured_media.width }}w
+              "
+              src="{{ product.featured_media | image_url: width: 533 }}"
+              sizes="(min-width: 750px) 50vw, 100vw"
+              alt="{{ product.featured_media.alt | escape }}"
+              loading="lazy"
+              width="{{ product.featured_media.width }}"
+              height="{{ product.featured_media.height }}"
+              class="dual-product-showcase__image"
+            >
+          {% else %}
+            {{ 'product-1' | placeholder_svg_tag: 'dual-product-showcase__image placeholder-svg' }}
+          {% endif %}
+        </div>
+        {% unless block.settings.hide_details %}
+          <div class="dual-product-showcase__content">
+            <h3 class="dual-product-showcase__title">{{ product.title }}</h3>
+            <div class="dual-product-showcase__price">
+              {% if product.price_varies %}
+                <span>From {{ product.price_min | money }}</span>
+              {% else %}
+                <span>{{ product.price | money }}</span>
+              {% endif %}
+            </div>
+            <a href="{{ product.url }}" class="dual-product-showcase__button dual-product-showcase__button--primary">
+              View Details
+            </a>
+          </div>
+        {% endunless %}
+      </div>
+    {% elsif block.type == 'custom_image' and block.settings.image != blank %}
+      <div class="dual-product-showcase__item" {{ block.shopify_attributes }}>
+        <div class="dual-product-showcase__image-wrapper">
+          {%- assign img_url = block.settings.image | image_url: width: 1500 -%}
+          <img
+            srcset="
+              {% if block.settings.image.width >= 165 %}{{ block.settings.image | image_url: width: 165 }} 165w,{% endif %}
+              {% if block.settings.image.width >= 360 %}{{ block.settings.image | image_url: width: 360 }} 360w,{% endif %}
+              {% if block.settings.image.width >= 533 %}{{ block.settings.image | image_url: width: 533 }} 533w,{% endif %}
+              {% if block.settings.image.width >= 720 %}{{ block.settings.image | image_url: width: 720 }} 720w,{% endif %}
+              {% if block.settings.image.width >= 940 %}{{ block.settings.image | image_url: width: 940 }} 940w,{% endif %}
+              {% if block.settings.image.width >= 1066 %}{{ block.settings.image | image_url: width: 1066 }} 1066w,{% endif %}
+              {{ block.settings.image | image_url }} {{ block.settings.image.width }}w
+            "
+            src="{{ block.settings.image | image_url: width: 533 }}"
+            sizes="(min-width: 750px) 50vw, 100vw"
+            alt="{{ block.settings.image.alt | escape }}"
+            loading="lazy"
+            width="{{ block.settings.image.width }}"
+            height="{{ block.settings.image.height }}"
+            class="dual-product-showcase__image"
+          >
+        </div>
+        {% unless block.settings.hide_details %}
+          <div class="dual-product-showcase__content">
+            {% if block.settings.title != blank %}
+              <h3 class="dual-product-showcase__title">{{ block.settings.title }}</h3>
+            {% endif %}
+            {% if block.settings.text != blank %}
+              <div class="dual-product-showcase__text">
+                <p>{{ block.settings.text }}</p>
+              </div>
+            {% endif %}
+            {% if block.settings.button_label != blank and block.settings.button_link != blank %}
+              <a
+                href="{{ block.settings.button_link }}"
+                class="dual-product-showcase__button dual-product-showcase__button--primary"
+              >
+                {{ block.settings.button_label }}
+              </a>
+            {% endif %}
+          </div>
+        {% endunless %}
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Dual Product Showcase",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 2,
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_details",
+          "label": "Hide product details",
+          "default": false,
+          "info": "When checked, only the product image will be displayed without any hover details"
+        }
+      ]
+    },
+    {
+      "type": "custom_image",
+      "name": "Custom Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_details",
+          "label": "Hide details",
+          "default": false,
+          "info": "When checked, only the image will be displayed without any hover details"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Image title"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Pair text with an image to focus on your chosen product, collection, or blog post."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Learn more"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Dual Product Showcase",
+      "blocks": [
+        {
+          "type": "product"
+        },
+        {
+          "type": "product"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
