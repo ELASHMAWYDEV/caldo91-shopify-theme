@@ -1,0 +1,27 @@
+@media screen and (max-width: 749px) {
+  .fullwidth-mobile-image {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+    height: 100% !important;
+  }
+
+  .fullwidth-mobile-image .product__media img {
+    width: 100% !important;
+    object-fit: cover !important;
+    height: 100% !important;
+    object-position: center !important;
+  }
+
+  .fullwidth-mobile-image .product__modal-opener,
+  .fullwidth-mobile-image .product__media {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  body {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+}

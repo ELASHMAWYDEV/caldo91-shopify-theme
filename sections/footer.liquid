@@ -7,9 +7,19 @@
 {%- style -%}
   .footer {
     margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
-    background-color: #1e1e1e;
+    background-color: #1e1e1e; /* #0f1d51 */
     color: #ffffff;
     padding: 40px 0 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .footer .page-width {
+    margin: 0;
+    align-self: center;
+    width: 100%;
   }
 
   .footer a {
@@ -38,32 +48,55 @@
   }
 
   .footer__content-top {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
   }
 
   .footer-block.footer-block--brand {
-    grid-column: span 2;
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    margin-bottom: 10px;
   }
 
+  /* Links section container for 2 columns mobile layout */
+  .footer__links-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0px;
+    width: 100%;
+  }
 
+  .footer__links-container .footer-block {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
 
   @media screen and (min-width: 750px) {
     .footer__content-top {
+      display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 30px;
     }
 
     .footer-block.footer-block--brand {
       grid-column: span 1;
+      margin-bottom: 0;
+    }
+
+    .footer__links-container {
+      display: contents;
     }
   }
 
   .footer__logo-wrapper {
     max-width: 120px;
     margin-bottom: 20px;
-    background-color: #1e1e1e;
+    background-color: #1e1e1e; /* #0f1d51 */
   }
 
   .footer__logo-wrapper img {
@@ -73,12 +106,18 @@
   }
 
   .footer-block {
-    margin-bottom: 10px;
-    padding-top: 20px
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .footer-block {
+      padding-bottom: 0;
+    }
   }
 
   .footer-block__heading {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 500;
     margin: 0 0 15px 0;
     text-transform: uppercase;
@@ -91,7 +130,7 @@
   }
 
   .footer-block__details-content li {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 
   .footer-block__details-content a {
@@ -100,16 +139,32 @@
     font-size: 1.4rem;
   }
 
+  .footer__payment-social-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 20px 0;
+    padding: 15px 0;
+  }
+
+  @media screen and (min-width: 750px) {
+    .footer__payment-social-container {
+      display: none;
+    }
+  }
+
   .footer__content-bottom {
+    margin-top: 0px;
+    padding-top: 0px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: 20px;
-    padding-top: 20px;
   }
 
   .footer__content-bottom-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 0px;
   }
 
   @media screen and (min-width: 750px) {
@@ -117,22 +172,27 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
+      gap: 0;
     }
   }
 
   .footer__copyright {
     text-align: center;
+    margin-bottom: 15px;
   }
 
   @media screen and (min-width: 750px) {
     .footer__copyright {
       text-align: left;
+      margin-bottom: 0;
     }
   }
 
   .footer__payment-icons {
     display: flex;
-    margin-top: 0px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    justify-content: center;
   }
 
   .footer__payment-icons img {
@@ -141,21 +201,35 @@
     object-fit: contain;
   }
 
-  @media screen and (min-width: 750px) {
-    .footer__payment-icons {
-      margin-top: 0;
-    }
-  }
-
   .payment-icon {
     margin-right: 10px;
+  }
+
+  .footer__desktop-payment-social {
+    display: none;
+  }
+
+  @media screen and (min-width: 750px) {
+    .footer__desktop-payment-social {
+      display: flex;
+    }
+
+    .footer__payment-icons {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
   }
 
   .footer__social {
     display: flex;
     gap: 15px;
-    margin-top: 0px;
+    margin-top: 10px;
     justify-content: center;
+    align-items: center;
+  }
+
+  .footer__social.mobile-only {
+      display: none;
   }
 
   @media screen and (min-width: 750px) {
@@ -199,130 +273,130 @@
         {%- endif -%}
       </div>
 
-      <!-- Navigation Columns -->
-      {%- for block in section.blocks -%}
-        <div class="footer-block" {{ block.shopify_attributes }}>
-          {%- if block.settings.heading != blank -%}
-            <h2 class="footer-block__heading">{{ block.settings.heading }}</h2>
-          {%- endif -%}
+      <!-- Navigation Columns - Wrapped in a container for mobile grid layout -->
+      <div class="footer__links-container">
+        {%- for block in section.blocks -%}
+          <div class="footer-block" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}
+              <h2 class="footer-block__heading">{{ block.settings.heading }}</h2>
+            {%- endif -%}
 
-          {%- case block.type -%}
-            {%- when 'link_list' -%}
-              {%- if block.settings.menu != blank -%}
+            {%- case block.type -%}
+              {%- when 'link_list' -%}
+                {%- if block.settings.menu != blank -%}
+                  <ul class="footer-block__details-content">
+                    {%- for link in block.settings.menu.links -%}
+                      <li>
+                        <a href="{{ link.url }}" class="link{% if link.active %} link--active{% endif %}">
+                          {{ link.title | escape }}
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+
+              {%- when 'text' -%}
+                <div class="footer-block__details-content rte">
+                  {{ block.settings.text }}
+                </div>
+
+              {%- when 'custom_links' -%}
                 <ul class="footer-block__details-content">
-                  {%- for link in block.settings.menu.links -%}
+                  {%- if block.settings.link_1_text != blank -%}
                     <li>
-                      <a href="{{ link.url }}" class="link{% if link.active %} link--active{% endif %}">
-                        {{ link.title | escape }}
-                      </a>
+                      <a href="{{ block.settings.link_1_url }}">{{ block.settings.link_1_text }}</a>
                     </li>
-                  {%- endfor -%}
+                  {%- endif -%}
+                  {%- if block.settings.link_2_text != blank -%}
+                    <li>
+                      <a href="{{ block.settings.link_2_url }}">{{ block.settings.link_2_text }}</a>
+                    </li>
+                  {%- endif -%}
+                  {%- if block.settings.link_3_text != blank -%}
+                    <li>
+                      <a href="{{ block.settings.link_3_url }}">{{ block.settings.link_3_text }}</a>
+                    </li>
+                  {%- endif -%}
+                  {%- if block.settings.link_4_text != blank -%}
+                    <li>
+                      <a href="{{ block.settings.link_4_url }}">{{ block.settings.link_4_text }}</a>
+                    </li>
+                  {%- endif -%}
+                  {%- if block.settings.link_5_text != blank -%}
+                    <li>
+                      <a href="{{ block.settings.link_5_url }}">{{ block.settings.link_5_text }}</a>
+                    </li>
+                  {%- endif -%}
+                  {%- if block.settings.link_6_text != blank -%}
+                    <li>
+                      <a href="{{ block.settings.link_6_url }}">{{ block.settings.link_6_text }}</a>
+                    </li>
+                  {%- endif -%}
+                  {%- if block.settings.link_7_text != blank -%}
+                    <li>
+                      <a href="{{ block.settings.link_7_url }}">{{ block.settings.link_7_text }}</a>
+                    </li>
+                  {%- endif -%}
                 </ul>
+            {%- endcase -%}
+          </div>
+        {%- endfor -%}
+        <!-- Payment and social icons for mobile -->
+        <div class="footer__payment-social-container">
+          <div class="footer__payment-icons">
+            {%- if section.settings.show_payment_icons -%}
+              {%- if section.settings.visa_icon -%}
+                <img
+                  src="{{ section.settings.visa_icon | image_url: width: 50 }}"
+                  alt="Visa"
+                  class="payment-icon"
+                  width="50"
+                  height="auto"
+                >
+              {%- else -%}
+                <svg
+                  class="payment-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  viewBox="0 0 38 24"
+                  width="38"
+                  height="24"
+                  aria-labelledby="pi-visa"
+                >
+                  <title id="pi-visa">Visa</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"/><path fill="#142688" d="M28.3 10.1H28c-.4 1-.7 1.5-1 3h1.9c-.3-1.5-.3-2.2-.6-3zm2.9 5.9h-1.7c-.1 0-.1 0-.2-.1l-.2-.9-.1-.2h-2.4c-.1 0-.2 0-.2.2l-.3.9c0 .1-.1.1-.1.1h-2.1l.2-.5L27 8.7c0-.5.3-.7.8-.7h1.5c.1 0 .2 0 .2.2l1.4 6.5c.1.4.2.7.2 1.1.1.1.1.1.1.2zm-13.4-.3l.4-1.8c.1 0 .2.1.2.1.7.3 1.4.5 2.1.4.2 0 .5-.1.7-.2.5-.2.5-.7.1-1.1-.2-.2-.5-.3-.8-.5-.4-.2-.8-.4-1.1-.7-1.2-1-.8-2.4-.1-3.1.6-.4.9-.8 1.7-.8 1.2 0 2.5 0 3.1.2h.1c-.1.6-.2 1.1-.4 1.7-.5-.2-1-.4-1.5-.4-.3 0-.6 0-.9.1-.2 0-.3.1-.4.2-.2.2-.2.5 0 .7l.5.4c.4.2.8.4 1.1.6.5.3 1 .8 1.1 1.4.2.9-.1 1.7-.9 2.3-.5.4-.7.6-1.4.6-1.4 0-2.5.1-3.4-.2-.1.2-.1.2-.2.1zm-3.5.3c.1-.7.1-.7.2-1 .5-2.2 1-4.5 1.4-6.7.1-.2.1-.3.3-.3H18c-.2 1.2-.4 2.1-.7 3.2-.3 1.5-.6 3-1 4.5 0 .2-.1.2-.3.2M5 8.2c0-.1.2-.2.3-.2h3.4c.5 0 .9.3 1 .8l.9 4.4c0 .1 0 .1.1.2 0-.1.1-.1.1-.1l2.1-5.1c-.1-.1 0-.2.1-.2h2.1c0 .1 0 .1-.1.2l-3.1 7.3c-.1.2-.1.3-.2.4-.1.1-.3 0-.5 0H9.7c-.1 0-.2 0-.2-.2L7.9 9.5c-.2-.2-.5-.5-.9-.6-.6-.3-1.7-.5-1.9-.5L5 8.2z"/>
+                </svg>
               {%- endif -%}
 
-            {%- when 'text' -%}
-              <div class="footer-block__details-content rte">
-                {{ block.settings.text }}
-              </div>
-
-            {%- when 'custom_links' -%}
-              <ul class="footer-block__details-content">
-                {%- if block.settings.link_1_text != blank -%}
-                  <li>
-                    <a href="{{ block.settings.link_1_url }}">{{ block.settings.link_1_text }}</a>
-                  </li>
-                {%- endif -%}
-                {%- if block.settings.link_2_text != blank -%}
-                  <li>
-                    <a href="{{ block.settings.link_2_url }}">{{ block.settings.link_2_text }}</a>
-                  </li>
-                {%- endif -%}
-                {%- if block.settings.link_3_text != blank -%}
-                  <li>
-                    <a href="{{ block.settings.link_3_url }}">{{ block.settings.link_3_text }}</a>
-                  </li>
-                {%- endif -%}
-                {%- if block.settings.link_4_text != blank -%}
-                  <li>
-                    <a href="{{ block.settings.link_4_url }}">{{ block.settings.link_4_text }}</a>
-                  </li>
-                {%- endif -%}
-                {%- if block.settings.link_5_text != blank -%}
-                  <li>
-                    <a href="{{ block.settings.link_5_url }}">{{ block.settings.link_5_text }}</a>
-                  </li>
-                {%- endif -%}
-                {%- if block.settings.link_6_text != blank -%}
-                  <li>
-                    <a href="{{ block.settings.link_6_url }}">{{ block.settings.link_6_text }}</a>
-                  </li>
-                {%- endif -%}
-                {%- if block.settings.link_7_text != blank -%}
-                  <li>
-                    <a href="{{ block.settings.link_7_url }}">{{ block.settings.link_7_text }}</a>
-                  </li>
-                {%- endif -%}
-              </ul>
-          {%- endcase -%}
+              {%- if section.settings.mastercard_icon -%}
+                <img
+                  src="{{ section.settings.mastercard_icon | image_url: width: 50 }}"
+                  alt="Mastercard"
+                  class="payment-icon"
+                  width="50"
+                  height="auto"
+                >
+              {%- else -%}
+                <svg
+                  class="payment-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  viewBox="0 0 38 24"
+                  width="38"
+                  height="24"
+                  aria-labelledby="pi-master"
+                >
+                  <title id="pi-master">Mastercard</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"/><circle fill="#EB001B" cx="15" cy="12" r="7"/><circle fill="#F79E1B" cx="23" cy="12" r="7"/><path fill="#FF5F00" d="M22 12c0-2.4-1.2-4.5-3-5.7-1.8 1.3-3 3.4-3 5.7s1.2 4.5 3 5.7c1.8-1.2 3-3.3 3-5.7z"/>
+                </svg>
+              {%- endif -%}
+            {%- endif -%}
+          </div>
         </div>
-      {%- endfor -%}
+      </div>
     </div>
 
     <div class="footer__content-bottom">
       <div class="footer__content-bottom-wrapper">
-        <div class="footer__copyright">
-          <small> &copy; {{ section.settings.copyright_text | default: 'All Rights Reserved Caldo91' }}</small>
-        </div>
-
-        <div class="footer__payment-icons">
-          {%- if section.settings.show_payment_icons -%}
-            {%- if section.settings.visa_icon -%}
-              <img
-                src="{{ section.settings.visa_icon | image_url: width: 50 }}"
-                alt="Visa"
-                class="payment-icon"
-                width="50"
-                height="auto"
-              >
-            {%- else -%}
-              <svg
-                class="payment-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                viewBox="0 0 38 24"
-                width="38"
-                height="24"
-                aria-labelledby="pi-visa"
-              >
-                <title id="pi-visa">Visa</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"/><path fill="#142688" d="M28.3 10.1H28c-.4 1-.7 1.5-1 3h1.9c-.3-1.5-.3-2.2-.6-3zm2.9 5.9h-1.7c-.1 0-.1 0-.2-.1l-.2-.9-.1-.2h-2.4c-.1 0-.2 0-.2.2l-.3.9c0 .1-.1.1-.1.1h-2.1l.2-.5L27 8.7c0-.5.3-.7.8-.7h1.5c.1 0 .2 0 .2.2l1.4 6.5c.1.4.2.7.2 1.1.1.1.1.1.1.2zm-13.4-.3l.4-1.8c.1 0 .2.1.2.1.7.3 1.4.5 2.1.4.2 0 .5-.1.7-.2.5-.2.5-.7.1-1.1-.2-.2-.5-.3-.8-.5-.4-.2-.8-.4-1.1-.7-1.2-1-.8-2.4-.1-3.1.6-.4.9-.8 1.7-.8 1.2 0 2.5 0 3.1.2h.1c-.1.6-.2 1.1-.4 1.7-.5-.2-1-.4-1.5-.4-.3 0-.6 0-.9.1-.2 0-.3.1-.4.2-.2.2-.2.5 0 .7l.5.4c.4.2.8.4 1.1.6.5.3 1 .8 1.1 1.4.2.9-.1 1.7-.9 2.3-.5.4-.7.6-1.4.6-1.4 0-2.5.1-3.4-.2-.1.2-.1.2-.2.1zm-3.5.3c.1-.7.1-.7.2-1 .5-2.2 1-4.5 1.4-6.7.1-.2.1-.3.3-.3H18c-.2 1.2-.4 2.1-.7 3.2-.3 1.5-.6 3-1 4.5 0 .2-.1.2-.3.2M5 8.2c0-.1.2-.2.3-.2h3.4c.5 0 .9.3 1 .8l.9 4.4c0 .1 0 .1.1.2 0-.1.1-.1.1-.1l2.1-5.1c-.1-.1 0-.2.1-.2h2.1c0 .1 0 .1-.1.2l-3.1 7.3c-.1.2-.1.3-.2.4-.1.1-.3 0-.5 0H9.7c-.1 0-.2 0-.2-.2L7.9 9.5c-.2-.2-.5-.5-.9-.6-.6-.3-1.7-.5-1.9-.5L5 8.2z"/>
-              </svg>
-            {%- endif -%}
-
-            {%- if section.settings.mastercard_icon -%}
-              <img
-                src="{{ section.settings.mastercard_icon | image_url: width: 50 }}"
-                alt="Mastercard"
-                class="payment-icon"
-                width="50"
-                height="auto"
-              >
-            {%- else -%}
-              <svg
-                class="payment-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                viewBox="0 0 38 24"
-                width="38"
-                height="24"
-                aria-labelledby="pi-master"
-              >
-                <title id="pi-master">Mastercard</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"/><circle fill="#EB001B" cx="15" cy="12" r="7"/><circle fill="#F79E1B" cx="23" cy="12" r="7"/><path fill="#FF5F00" d="M22 12c0-2.4-1.2-4.5-3-5.7-1.8 1.3-3 3.4-3 5.7s1.2 4.5 3 5.7c1.8-1.2 3-3.3 3-5.7z"/>
-              </svg>
-            {%- endif -%}
-          {%- endif -%}
-        </div>
-
-        <div class="footer__social">
+        <div class="footer__social mobile-only">
           {%- if section.settings.show_social_icons -%}
             {%- if settings.social_facebook_link != blank -%}
               <a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener" class="social-icon">
@@ -423,6 +497,166 @@
               </svg>
             </a>
           {%- endif -%}
+        </div>
+        <div class="footer__copyright">
+          <small>
+            &copy; {{ 'now' | date: '%Y' }}
+            {{ section.settings.copyright_text | default: 'All Rights Reserved | Caldo91' -}}
+          </small>
+        </div>
+
+        <!-- Desktop only payment icons and social media -->
+        <div class="footer__desktop-payment-social">
+          <div class="footer__payment-icons">
+            {%- if section.settings.show_payment_icons -%}
+              {%- if section.settings.visa_icon -%}
+                <img
+                  src="{{ section.settings.visa_icon | image_url: width: 50 }}"
+                  alt="Visa"
+                  class="payment-icon"
+                  width="50"
+                  height="auto"
+                >
+              {%- else -%}
+                <svg
+                  class="payment-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  viewBox="0 0 38 24"
+                  width="38"
+                  height="24"
+                  aria-labelledby="pi-visa"
+                >
+                  <title id="pi-visa">Visa</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"/><path fill="#142688" d="M28.3 10.1H28c-.4 1-.7 1.5-1 3h1.9c-.3-1.5-.3-2.2-.6-3zm2.9 5.9h-1.7c-.1 0-.1 0-.2-.1l-.2-.9-.1-.2h-2.4c-.1 0-.2 0-.2.2l-.3.9c0 .1-.1.1-.1.1h-2.1l.2-.5L27 8.7c0-.5.3-.7.8-.7h1.5c.1 0 .2 0 .2.2l1.4 6.5c.1.4.2.7.2 1.1.1.1.1.1.1.2zm-13.4-.3l.4-1.8c.1 0 .2.1.2.1.7.3 1.4.5 2.1.4.2 0 .5-.1.7-.2.5-.2.5-.7.1-1.1-.2-.2-.5-.3-.8-.5-.4-.2-.8-.4-1.1-.7-1.2-1-.8-2.4-.1-3.1.6-.4.9-.8 1.7-.8 1.2 0 2.5 0 3.1.2h.1c-.1.6-.2 1.1-.4 1.7-.5-.2-1-.4-1.5-.4-.3 0-.6 0-.9.1-.2 0-.3.1-.4.2-.2.2-.2.5 0 .7l.5.4c.4.2.8.4 1.1.6.5.3 1 .8 1.1 1.4.2.9-.1 1.7-.9 2.3-.5.4-.7.6-1.4.6-1.4 0-2.5.1-3.4-.2-.1.2-.1.2-.2.1zm-3.5.3c.1-.7.1-.7.2-1 .5-2.2 1-4.5 1.4-6.7.1-.2.1-.3.3-.3H18c-.2 1.2-.4 2.1-.7 3.2-.3 1.5-.6 3-1 4.5 0 .2-.1.2-.3.2M5 8.2c0-.1.2-.2.3-.2h3.4c.5 0 .9.3 1 .8l.9 4.4c0 .1 0 .1.1.2 0-.1.1-.1.1-.1l2.1-5.1c-.1-.1 0-.2.1-.2h2.1c0 .1 0 .1-.1.2l-3.1 7.3c-.1.2-.1.3-.2.4-.1.1-.3 0-.5 0H9.7c-.1 0-.2 0-.2-.2L7.9 9.5c-.2-.2-.5-.5-.9-.6-.6-.3-1.7-.5-1.9-.5L5 8.2z"/>
+                </svg>
+              {%- endif -%}
+
+              {%- if section.settings.mastercard_icon -%}
+                <img
+                  src="{{ section.settings.mastercard_icon | image_url: width: 50 }}"
+                  alt="Mastercard"
+                  class="payment-icon"
+                  width="50"
+                  height="auto"
+                >
+              {%- else -%}
+                <svg
+                  class="payment-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  viewBox="0 0 38 24"
+                  width="38"
+                  height="24"
+                  aria-labelledby="pi-master"
+                >
+                  <title id="pi-master">Mastercard</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"/><circle fill="#EB001B" cx="15" cy="12" r="7"/><circle fill="#F79E1B" cx="23" cy="12" r="7"/><path fill="#FF5F00" d="M22 12c0-2.4-1.2-4.5-3-5.7-1.8 1.3-3 3.4-3 5.7s1.2 4.5 3 5.7c1.8-1.2 3-3.3 3-5.7z"/>
+                </svg>
+              {%- endif -%}
+            {%- endif -%}
+          </div>
+
+          <div class="footer__social">
+            {%- if section.settings.show_social_icons -%}
+              {%- if settings.social_facebook_link != blank -%}
+                <a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener" class="social-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                  </svg>
+                </a>
+              {%- else -%}
+                <a href="https://facebook.com" target="_blank" rel="noopener" class="social-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                  </svg>
+                </a>
+              {%- endif -%}
+
+              {%- if settings.social_instagram_link != blank -%}
+                <a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener" class="social-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                </a>
+              {%- else -%}
+                <a href="https://instagram.com" target="_blank" rel="noopener" class="social-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                </a>
+              {%- endif -%}
+            {%- else -%}
+              <a href="https://facebook.com" target="_blank" rel="noopener" class="social-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener" class="social-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </a>
+            {%- endif -%}
+          </div>
         </div>
       </div>
     </div>

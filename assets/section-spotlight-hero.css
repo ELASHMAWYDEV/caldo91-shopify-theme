@@ -46,21 +46,25 @@
   z-index: 2;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  align-items: flex-start;
+  justify-content: flex-end;
+  text-align: left;
   width: 100%;
   height: 100%;
   padding: 2rem;
 }
 
 .spotlight-hero__spotlight {
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
   height: 60%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding-left: 2rem;
+  padding-bottom: 2rem;
 }
 
 .spotlight-hero__spotlight-beam {
@@ -72,6 +76,7 @@
   box-shadow: 0 0 150px 100px rgba(255, 255, 255, 0.2);
   animation: pulse 3s infinite alternate;
   z-index: 3;
+  transform: translate(-50px, 50px);
 }
 
 .spotlight-hero__collection {
@@ -80,14 +85,15 @@
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 1.5rem;
   z-index: 3;
   max-width: 800px;
+  align-self: flex-start;
 }
 
 .spotlight-hero__collection-subtitle {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Josefin', sans-serif;
   font-size: 1rem;
   font-weight: 300;
   letter-spacing: 0.3em;
@@ -97,7 +103,7 @@
 }
 
 .spotlight-hero__collection-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Josefin', serif;
   font-size: 3.5rem;
   font-weight: 700;
   line-height: 1.2;
@@ -106,7 +112,7 @@
 }
 
 .spotlight-hero__collection-description {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Josefin', sans-serif;
   font-size: 1.1rem;
   font-weight: 300;
   line-height: 1.6;
@@ -116,59 +122,72 @@
 }
 
 .spotlight-hero__collection-cta .button {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Josefin', sans-serif;
   font-size: 1.2rem;
-  font-weight: 500;
-  padding: 0.8rem 0;
-  border: none;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
   width: max-content;
-  background-color: transparent;
-  color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.95);
   text-transform: uppercase;
   letter-spacing: 0.2em;
   transition: all 0.3s ease;
   cursor: pointer;
   position: relative;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   display: inline-flex;
   align-items: center;
-  padding: 0.8rem 1.5rem;
+  gap: 0.5rem;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.spotlight-hero__collection-cta .button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.7s ease;
 }
 
 .spotlight-hero__collection-cta .button::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0.8rem;
-  width: 100%;
-  height: 1px;
-  background-color: rgba(255, 255, 255, 1);
-  transform: scaleX(0.3);
-  transform-origin: left;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: none;
-  box-shadow: none;
+  display: none;
 }
 
 .spotlight-hero__collection-cta .button .button-arrow {
   margin-left: 0.5rem;
   transition: transform 0.3s ease;
+  font-size: 1.2em;
+  position: relative;
+  top: 1px;
 }
 
 .spotlight-hero__collection-cta .button:hover {
-  color: rgba(255, 255, 255, 1);
-  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.3);
+}
+
+.spotlight-hero__collection-cta .button:hover::before {
+  left: 100%;
 }
 
 .spotlight-hero__collection-cta .button:hover .button-arrow {
-  transform: translateX(5px);
+  transform: translateX(7px);
 }
 
-.spotlight-hero__collection-cta .button:hover::after {
-  transform: scaleX(0.9);
-  background-color: rgba(255, 255, 255, 1);
-  border: none;
-  box-shadow: none;
+.spotlight-hero__collection-cta .button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .spotlight-hero__location {
@@ -245,12 +264,18 @@
   }
 
   .spotlight-hero__collection-cta .button {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    padding: 0rem 1.5rem;
+  }
+
+  .spotlight-hero__collection {
+    padding: 1.5rem;
   }
 }
 
 @media screen and (min-width: 750px) {
   .spotlight-hero__collection {
     padding: 3rem;
+    margin-bottom: 2rem;
   }
 }

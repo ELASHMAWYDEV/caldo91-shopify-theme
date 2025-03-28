@@ -16,11 +16,31 @@
         "background_type": "video_library",
         "background_image": "shopify://shop_images/home-image-1.jpg",
         "background_video_url": "",
-        "background_video": "shopify://files/videos/home-video-1.mp4",
+        "background_video": "shopify://files/videos/Reel 3 Final (1).mp4",
         "show_spotlight": true,
         "spotlight_color": "#ffffff",
         "spotlight_intensity": 60,
-        "collection_subtitle": "Introducing",
+        "collection_subtitle": ",",
+        "collection_title": "EARTH COLLECTION",
+        "collection_description": "",
+        "cta_text": "Shop New Arrivals",
+        "cta_link": "/collections/all",
+        "show_map": true,
+        "color_scheme": "accent-1"
+      }
+    },
+    "spotlight_hero_PLqHLq": {
+      "type": "spotlight-hero",
+      "settings": {
+        "background_color": "#000000",
+        "background_type": "video_library",
+        "background_image": "shopify://shop_images/home-image-1.jpg",
+        "background_video_url": "",
+        "background_video": "shopify://files/videos/Feb 1 2025 Video.mov",
+        "show_spotlight": true,
+        "spotlight_color": "#ffffff",
+        "spotlight_intensity": 60,
+        "collection_subtitle": ",",
         "collection_title": "EARTH COLLECTION",
         "collection_description": "",
         "cta_text": "Shop New Arrivals",
@@ -32,7 +52,7 @@
     "full_screen_image": {
       "type": "full-screen-image",
       "settings": {
-        "image": "shopify://shop_images/Home_Image_1_Optimized.jpg",
+        "image": "shopify://shop_images/DSC03305_Enhanced_NR.jpg",
         "image_behavior": "none",
         "desktop_content_position": "middle-center",
         "desktop_content_alignment": "center",
@@ -42,64 +62,38 @@
         "color_scheme": "inverse"
       }
     },
-    "multi_image_scroll_section": {
-      "type": "multi-image-scroll-section",
-      "blocks": {
-        "block_1": {
-          "type": "image_with_title",
-          "settings": {
-            "image": "shopify://shop_images/showcase-home-1.jpg",
-            "title": "EARTH COLLECTION",
-            "link": "/collections/all",
-            "link_text": "Shop Now"
-          }
-        }
-      },
-      "block_order": [
-        "block_1"
-      ],
+    "full_screen_image_WcK9pG": {
+      "type": "full-screen-image",
       "settings": {
+        "image": "shopify://shop_images/showcase-home-1.jpg",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "mobile_content_alignment": "center",
         "image_overlay_color": "#000000",
-        "image_overlay_opacity": 30
+        "image_overlay_opacity": 0,
+        "color_scheme": "background-1"
       }
     },
-    "dual_product_showcase": {
-      "type": "dual-product-showcase",
-      "blocks": {
-        "custom_image1": {
-          "type": "custom_image",
-          "settings": {
-            "image": "shopify://shop_images/showcase-home-1.jpg",
-            "hide_details": true,
-            "title": "Featured Collection",
-            "text": "Discover our latest designs crafted with premium materials",
-            "button_label": "Shop Now",
-            "button_link": "/collections/all"
-          }
-        },
-        "custom_image_9MmJKX": {
-          "type": "custom_image",
-          "settings": {
-            "image": "shopify://shop_images/showcase-home-2.jpg",
-            "hide_details": true,
-            "title": "Image title",
-            "text": "Pair text with an image to focus on your chosen product, collection, or blog post.",
-            "button_label": "Learn more",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "custom_image1",
-        "custom_image_9MmJKX"
-      ],
-      "settings": {}
+    "full_screen_image_mhr8BK": {
+      "type": "full-screen-image",
+      "settings": {
+        "image": "shopify://shop_images/showcase-home-2.jpg",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "mobile_content_alignment": "center",
+        "image_overlay_color": "#000000",
+        "image_overlay_opacity": 0,
+        "color_scheme": "background-1"
+      }
     }
   },
   "order": [
     "spotlight_hero",
+    "spotlight_hero_PLqHLq",
     "full_screen_image",
-    "multi_image_scroll_section",
-    "dual_product_showcase"
+    "full_screen_image_WcK9pG",
+    "full_screen_image_mhr8BK"
   ]
 }
