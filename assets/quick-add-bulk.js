@@ -185,6 +185,11 @@ if (!customElements.get('quick-add-bulk')) {
           }
         });
 
+        // Open cart drawer after bulk add
+        if (window.openCartDrawer) {
+          window.openCartDrawer(true);
+        }
+
         if (this.isEnterPressed) {
           this.querySelector(`#Quantity-${this.lastActiveInputId}`).select();
         }

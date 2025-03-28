@@ -347,6 +347,12 @@ if (!customElements.get('quick-order-list')) {
               source: this.id,
               cartData: parsedState,
             });
+
+            // Open cart drawer after items are added (if any items have quantity > 0)
+            const hasItemsAdded = Object.values(items).some((qty) => qty > 0);
+            if (hasItemsAdded && window.openCartDrawer) {
+              window.openCartDrawer(true);
+            }
           })
           .catch((e) => {
             console.error(e);

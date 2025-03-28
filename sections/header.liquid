@@ -1676,7 +1676,9 @@
     </div>
 
     <div class="cart-drawer__actions">
-      <a href="{{ routes.cart_url }}" class="cart-drawer__checkout-button">Proceed to Checkout</a>
+      <form action="{{ routes.cart_url }}" method="post" id="cart-drawer-checkout-form">
+        <button type="submit" name="checkout" class="cart-drawer__checkout-button">Proceed to Checkout</button>
+      </form>
       <button id="cart-continue-shopping" class="cart-drawer__continue-shopping">Continue Shopping</button>
     </div>
 
@@ -2342,25 +2344,25 @@
 
     // Open cart drawer function
     function openCartDrawer(isNewItem = false) {
-    if (cartDrawer && cartDrawerOverlay) {
-    // Show and activate overlay first
-    cartDrawerOverlay.style.display = 'block';
-    // Force a reflow to ensure display takes effect before adding the active class
-    void cartDrawerOverlay.offsetWidth;
-    cartDrawerOverlay.classList.add('active');
-    
-    // Then activate drawer
-    setTimeout(() => {
-      cartDrawer.classList.add('active');
-    }, 10);
-    document.body.classList.add('overflow-hidden');
-    
-    // Update cart contents
-    updateCartContents(isNewItem);
-    
-    // If this is a new item, highlight the checkout button
-    if (isNewItem) {
+      if (cartDrawer && cartDrawerOverlay) {
+        // Show and activate overlay first
+        cartDrawerOverlay.style.display = 'block';
+        // Force a reflow to ensure display takes effect before adding the active class
+        void cartDrawerOverlay.offsetWidth;
+        cartDrawerOverlay.classList.add('active');
+
+        // Then activate drawer
         setTimeout(() => {
+          cartDrawer.classList.add('active');
+        }, 10);
+        document.body.classList.add('overflow-hidden');
+
+        // Update cart contents
+        updateCartContents(isNewItem);
+
+        // If this is a new item, highlight the checkout button
+        if (isNewItem) {
+          setTimeout(() => {
             highlightCheckoutButton();
           }, 400); // Wait for cart to slide in
         }
@@ -2374,18 +2376,18 @@
       if (cartDrawer && cartDrawerOverlay) {
         // First close drawer
         cartDrawer.classList.remove('active');
-        
+
         // Then remove overlay after drawer animation completes
         setTimeout(() => {
           cartDrawerOverlay.classList.remove('active');
           document.body.classList.remove('overflow-hidden');
-          
+
           // Hide overlay after animation completes
           setTimeout(() => {
             cartDrawerOverlay.style.display = 'none';
           }, 400);
         }, 300);
-        
+
         console.log('Cart drawer closed');
       }
     }

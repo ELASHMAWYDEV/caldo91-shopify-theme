@@ -13,6 +13,11 @@ class CartNotification extends HTMLElement {
   }
 
   open() {
+    if (window.openCartDrawer) {
+      window.openCartDrawer(true);
+      return;
+    }
+
     this.notification.classList.add('animate', 'active');
 
     this.notification.addEventListener(
@@ -44,6 +49,17 @@ class CartNotification extends HTMLElement {
     });
 
     if (this.header) this.header.reveal();
+
+    // Trigger cart update event before opening
+    document.dispatchEvent(
+      new CustomEvent('cart:refresh', {
+        detail: {
+          source: 'product-form',
+          key: this.cartItemKey,
+        },
+      })
+    );
+
     this.open();
   }
 
