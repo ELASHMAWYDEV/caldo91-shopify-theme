@@ -147,6 +147,11 @@
         "type": "shopify://apps/bucks/blocks/app-embed/4f0a9b06-9da4-4a49-b378-2de9d23a3af3",
         "disabled": false,
         "settings": {}
+      },
+      "5550728556201851227": {
+        "type": "shopify://apps/glc-geolocation-redirects-app/blocks/selector/e347b539-0714-46e4-9e69-23a73992ae3a",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {

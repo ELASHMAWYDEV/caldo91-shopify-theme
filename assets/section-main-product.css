@@ -1209,7 +1209,7 @@ a.product__text {
 }
 
 .product__inventory .icon-inventory-status circle:first-of-type {
-  opacity: .3;
+  opacity: 0.3;
 }
 
 /* Icon with text */
@@ -1316,7 +1316,7 @@ a.product__text {
 }
 
 .product-media-container.constrain-height .media {
-  padding-top: min(var(--constrained-height), var(--ratio-percent));
+  /* padding-top: min(var(--constrained-height), var(--ratio-percent)); */
 }
 
 @media screen and (max-width: 749px) {

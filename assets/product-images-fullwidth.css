@@ -16,7 +16,7 @@
   .fullwidth-mobile-image .product__modal-opener,
   .fullwidth-mobile-image .product__media {
     width: 100% !important;
-    height: 100% !important;
+    /* height: 100% !important; */
   }
 
   body {

@@ -64,6 +64,9 @@ class CartNotification extends HTMLElement {
   }
 
   getSectionsToRender() {
+    if (window.openCartDrawer) {
+      window.openCartDrawer(true);
+    }
     return [
       {
         id: 'cart-notification-product',
