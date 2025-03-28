@@ -70,7 +70,7 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
-  
+
   /* Cart Drawer Styles */
   .cart-drawer {
     position: fixed;
@@ -79,36 +79,41 @@
     width: 400px;
     height: 100vh;
     background-color: #ffffff;
-    z-index: 1001;
-    transform: translateX(100%);
+    z-index: 9999;
+    transform: translateX(100%) scale(0.95);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
     overflow: hidden;
   }
 
   .cart-drawer.active {
-    transform: translateX(0);
+    transform: translateX(0) scale(1);
   }
 
   .cart-drawer__overlay {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    z-index: 9995;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    backdrop-filter: blur(2px);
+    display: none;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    cursor: pointer;
   }
 
   .cart-drawer__overlay.active {
     opacity: 1;
     visibility: visible;
+    display: block;
+    pointer-events: all;
   }
 
   .cart-drawer__header {
@@ -173,7 +178,7 @@
     animation: fade-in 0.3s ease-out;
     position: relative;
   }
-  
+
   @keyframes fade-in {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -188,7 +193,7 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s ease;
   }
-  
+
   .cart-drawer__item-image:hover {
     transform: scale(1.05);
   }
@@ -254,7 +259,7 @@
   .cart-drawer__item-quantity-button:hover {
     background-color: #f0f0f0;
   }
-  
+
   .cart-drawer__item-quantity-button:active {
     transform: scale(0.95);
   }
@@ -269,7 +274,7 @@
     color: #333;
     -moz-appearance: textfield;
   }
-  
+
   .cart-drawer__item-quantity-input::-webkit-outer-spin-button,
   .cart-drawer__item-quantity-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -296,7 +301,7 @@
     color: #d9534f;
     background-color: #f8f8f8;
   }
-  
+
   .cart-drawer__item-remove-icon {
     width: 12px;
     height: 12px;
@@ -326,12 +331,12 @@
     letter-spacing: 1px;
     color: #505050;
   }
-  
+
   .cart-drawer__subtotal-value {
     font-weight: 600;
     font-size: 18px;
   }
-  
+
   .cart-drawer__actions {
     display: flex;
     flex-direction: column;
@@ -358,7 +363,7 @@
   .cart-drawer__checkout-button:hover {
     background-color: #333;
   }
-  
+
   .cart-drawer__checkout-button:active {
     transform: translateY(1px);
   }
@@ -385,11 +390,11 @@
     background-color: #f5f5f5;
     border-color: #ccc;
   }
-  
+
   .cart-drawer__continue-shopping:active {
     transform: translateY(1px);
   }
-  
+
   .cart-drawer__footer-info {
     margin-top: 15px;
     font-size: 12px;
@@ -398,18 +403,18 @@
     padding-top: 15px;
     border-top: 1px solid #f1f1f1;
   }
-  
+
   .cart-drawer__shipping-message {
     margin-bottom: 5px;
   }
-  
+
   .cart-drawer__secure-checkout {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
   }
-  
+
   .cart-drawer__secure-icon {
     width: 12px;
     height: 12px;
@@ -434,7 +439,7 @@
     margin-bottom: 20px;
     opacity: 0.7;
   }
-  
+
   .cart-drawer__empty {
     display: flex;
     flex-direction: column;
@@ -458,7 +463,7 @@
     margin-bottom: 10px;
     color: #333;
   }
-  
+
   .cart-drawer__empty-submessage {
     font-size: 14px;
     margin-bottom: 25px;
@@ -479,7 +484,17 @@
 
   @media screen and (max-width: 749px) {
     .cart-drawer {
-      width: 100%;
+      width: 90vw;
+    }
+
+    .cart-drawer__overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100vw;
+      height: 100vh;
     }
   }
 
@@ -555,7 +570,7 @@
     transition: background-color 0.3s ease, padding 0.3s ease;
     background: transparent;
   }
-  
+
   .header--scrolled {
     background-color: rgba(0, 0, 0, 0.92);
     padding: 15px 60px;
@@ -642,30 +657,30 @@
     margin-left: 20px;
     /* Remove overflow: hidden to allow the badge to be fully visible */
   }
-  
+
   .header__icon-link:hover,
   #cart-icon-bubble:hover {
     transform: translateY(-2px);
     background-color: rgba(255, 255, 255, 0.15);
   }
-  
+
   .header__icon-link:active,
   #cart-icon-bubble:active {
     transform: translateY(0);
   }
-  
+
   .header__icon-link .header__icon,
   #cart-icon-bubble .header__icon {
     transition: transform 0.3s ease;
     width: 22px;
     height: 22px;
   }
-  
+
   .header__icon-link:hover .header__icon,
   #cart-icon-bubble:hover .header__icon {
     transform: scale(1.1);
   }
-  
+
   /* Improved Cart Count Badge */
   .cart-count-bubble {
     position: absolute;
@@ -691,7 +706,7 @@
     border: 1.5px solid white;
     z-index: 5; /* Ensure it stays on top */
   }
-  
+
   /* Ripple effect for header icons */
   @keyframes ripple {
     0% {
@@ -703,7 +718,7 @@
       opacity: 0;
     }
   }
-  
+
   .cart-icon-ripple {
     position: fixed; /* Use fixed positioning to avoid overflow issues */
     width: 20px;
@@ -714,13 +729,13 @@
     animation: ripple 0.6s ease-out;
     z-index: 100; /* Ensure it stays above other content */
   }
-  
+
   @keyframes cart-bubble-pulse {
     0% { transform: scale(0.8); opacity: 0; }
     50% { transform: scale(1.2); }
     100% { transform: scale(1); opacity: 1; }
   }
-  
+
   .header__icon-link {
     color: white;
     text-decoration: none;
@@ -737,7 +752,7 @@
   .header__icon-link:hover {
     opacity: 0.8;
   }
-  
+
   @media screen and (max-width: 749px) {
     .header {
       padding: 4px 25px !important; /* Slightly reduced side padding */
@@ -803,7 +818,7 @@
       margin-left: 8px;
       padding: 5px;
     }
-    
+
     .header__icon-link .header__icon,
     #cart-icon-bubble .header__icon {
       width: 18px;
@@ -858,19 +873,19 @@
     .header__logo {
       font-size: 22px;
     }
-    
+
     .header__icon-link,
     #cart-icon-bubble {
       margin-left: 10px;
       padding: 6px;
     }
-    
+
     .header__icon-link .header__icon,
     #cart-icon-bubble .header__icon {
       width: 20px;
       height: 20px;
     }
-    
+
     .cart-count-bubble {
       min-width: 14px;
       height: 14px;
@@ -887,7 +902,7 @@
       margin-left: 8px;
       padding: 5px;
     }
-    
+
     .header__icon-link .header__icon,
     #cart-icon-bubble .header__icon {
       width: 18px;
@@ -940,8 +955,10 @@
   /* Body overflow control */
   body {
     overflow-x: hidden;
+    position: relative;
+    z-index: 0;
   }
-  
+
   /* Header width control */
   .header-wrapper {
     position: absolute;
@@ -980,6 +997,7 @@
   .header {
     background: transparent;
     transition: background-color 0.3s ease;
+    max-width: 100vw;
   }
 
   /* Text color based on color scheme */
@@ -1627,11 +1645,11 @@
       </svg>
     </button>
   </div>
-  
+
   <div id="cart-drawer-content" class="cart-drawer__content">
     <!-- Items container - shown when cart has items -->
     <div id="cart-drawer-items" class="cart-drawer__items"></div>
-    
+
     <!-- Empty cart message - shown when cart is empty -->
     <div id="cart-drawer-empty" class="cart-drawer__empty">
       <svg class="cart-drawer__empty-illustration" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1650,18 +1668,18 @@
       <button class="cart-drawer__continue-shopping cart-empty-continue-shopping">Continue Shopping</button>
     </div>
   </div>
-  
+
   <div class="cart-drawer__footer">
     <div class="cart-drawer__subtotal">
       <span class="cart-drawer__subtotal-label">Subtotal</span>
       <span id="cart-subtotal-value" class="cart-drawer__subtotal-value">$0.00</span>
     </div>
-    
+
     <div class="cart-drawer__actions">
       <a href="{{ routes.cart_url }}" class="cart-drawer__checkout-button">Proceed to Checkout</a>
       <button id="cart-continue-shopping" class="cart-drawer__continue-shopping">Continue Shopping</button>
     </div>
-    
+
     <div class="cart-drawer__footer-info">
       <div class="cart-drawer__shipping-message">Shipping & taxes calculated at checkout</div>
       <div class="cart-drawer__secure-checkout">
@@ -2200,29 +2218,29 @@
     console.log('Initializing menu and header functionality');
     setupFullscreenMenu();
     setupHeaderScroll();
-  
-  // Listen for various add to cart events
-  document.addEventListener('product:added', function() {
-    if (window.openCartDrawer) {
-      window.openCartDrawer(true);
-    }
-  });
-  
-  // Additionally listen for Shopify's add_to_cart event
-  document.addEventListener('add_to_cart', function() {
-    if (window.openCartDrawer) {
-      window.openCartDrawer(true);
-    }
-  });
-  
-  // Safely check for jQuery and use it if available
-  if (typeof jQuery !== 'undefined') {
-    jQuery(document).on('cart.requestComplete', function(event, cart) {
+
+    // Listen for various add to cart events
+    document.addEventListener('product:added', function () {
       if (window.openCartDrawer) {
         window.openCartDrawer(true);
       }
     });
-  }
+
+    // Additionally listen for Shopify's add_to_cart event
+    document.addEventListener('add_to_cart', function () {
+      if (window.openCartDrawer) {
+        window.openCartDrawer(true);
+      }
+    });
+
+    // Safely check for jQuery and use it if available
+    if (typeof jQuery !== 'undefined') {
+      jQuery(document).on('cart.requestComplete', function (event, cart) {
+        if (window.openCartDrawer) {
+          window.openCartDrawer(true);
+        }
+      });
+    }
     setupCartUpdates();
 
     // Ensure Lottie is loaded
@@ -2245,27 +2263,27 @@
     const cartDrawerOverlay = document.getElementById('cart-drawer-overlay');
     const cartCloseButton = document.getElementById('cart-drawer-close');
     const cartLoadingOverlay = document.getElementById('cart-drawer-loading');
-    
+
     // Function to show loading overlay
     function showCartLoading() {
       if (cartLoadingOverlay) {
         cartLoadingOverlay.classList.add('active');
       }
     }
-    
+
     // Function to hide loading overlay
     function hideCartLoading() {
       if (cartLoadingOverlay) {
         cartLoadingOverlay.classList.remove('active');
       }
     }
-    
+
     // Function to highlight checkout button when a new item is added
     function highlightCheckoutButton() {
       const checkoutButton = document.querySelector('.cart-drawer__checkout-button');
       if (checkoutButton) {
         checkoutButton.classList.add('cart-drawer__checkout-button--highlight');
-        
+
         // Remove the class after animation completes
         setTimeout(() => {
           checkoutButton.classList.remove('cart-drawer__checkout-button--highlight');
@@ -2274,90 +2292,117 @@
     }
     const cartContinueShopping = document.getElementById('cart-continue-shopping');
     const cartIconButton = document.getElementById('cart-icon-bubble');
-    
+
     // Open cart drawer when clicking the cart icon
     if (cartIconButton) {
       // Add ripple effect to all header icons
-      document.querySelectorAll('.header__icon-link, #cart-icon-bubble').forEach(icon => {
-        icon.addEventListener('click', function(e) {
+      document.querySelectorAll('.header__icon-link, #cart-icon-bubble').forEach((icon) => {
+        icon.addEventListener('click', function (e) {
           // Create ripple at mouse position
           const ripple = document.createElement('span');
           ripple.className = 'cart-icon-ripple';
           ripple.style.left = `${e.clientX}px`;
           ripple.style.top = `${e.clientY}px`;
           document.body.appendChild(ripple);
-          
+
           // Remove the ripple after animation completes
           setTimeout(() => {
             ripple.remove();
           }, 600);
         });
       });
-      
+
       // Set up cart open functionality
-      cartIconButton.addEventListener('click', function(e) {
+      cartIconButton.addEventListener('click', function (e) {
         e.preventDefault();
         openCartDrawer();
       });
     }
-    
+
     // Close cart drawer when clicking the close button
     if (cartCloseButton) {
       cartCloseButton.addEventListener('click', closeCartDrawer);
     }
-    
+
     // Close cart drawer when clicking any continue shopping button
     const continueShoppingButtons = document.querySelectorAll('.cart-drawer__continue-shopping');
-    continueShoppingButtons.forEach(button => {
+    continueShoppingButtons.forEach((button) => {
       button.addEventListener('click', closeCartDrawer);
     });
-    
-    // Close cart drawer when clicking the overlay
+
+    // Close cart drawer when clicking the overlay (blurry background)
     if (cartDrawerOverlay) {
-      cartDrawerOverlay.addEventListener('click', closeCartDrawer);
+      cartDrawerOverlay.addEventListener('click', function (event) {
+        // Only close if clicking directly on the overlay (not its children)
+        if (event.target === this) {
+          closeCartDrawer();
+        }
+      });
     }
-    
+
     // Open cart drawer function
     function openCartDrawer(isNewItem = false) {
-      if (cartDrawer && cartDrawerOverlay) {
-        cartDrawer.classList.add('active');
-        cartDrawerOverlay.classList.add('active');
-        document.body.classList.add('overflow-hidden');
-        
-        // Update cart contents
-        updateCartContents(isNewItem);
-        
-        // If this is a new item, highlight the checkout button
-        if (isNewItem) {
-          setTimeout(() => {
+    if (cartDrawer && cartDrawerOverlay) {
+    // Show and activate overlay first
+    cartDrawerOverlay.style.display = 'block';
+    // Force a reflow to ensure display takes effect before adding the active class
+    void cartDrawerOverlay.offsetWidth;
+    cartDrawerOverlay.classList.add('active');
+    
+    // Then activate drawer
+    setTimeout(() => {
+      cartDrawer.classList.add('active');
+    }, 10);
+    document.body.classList.add('overflow-hidden');
+    
+    // Update cart contents
+    updateCartContents(isNewItem);
+    
+    // If this is a new item, highlight the checkout button
+    if (isNewItem) {
+        setTimeout(() => {
             highlightCheckoutButton();
           }, 400); // Wait for cart to slide in
         }
+
+        console.log('Cart drawer opened, overlay activated');
       }
     }
-    
+
     // Close cart drawer function
     function closeCartDrawer() {
       if (cartDrawer && cartDrawerOverlay) {
+        // First close drawer
         cartDrawer.classList.remove('active');
-        cartDrawerOverlay.classList.remove('active');
-        document.body.classList.remove('overflow-hidden');
+        
+        // Then remove overlay after drawer animation completes
+        setTimeout(() => {
+          cartDrawerOverlay.classList.remove('active');
+          document.body.classList.remove('overflow-hidden');
+          
+          // Hide overlay after animation completes
+          setTimeout(() => {
+            cartDrawerOverlay.style.display = 'none';
+          }, 400);
+        }, 300);
+        
+        console.log('Cart drawer closed');
       }
     }
-    
+
     // Update cart contents function
     function updateCartContents(isNewItem = false) {
       const cartContent = document.getElementById('cart-drawer-content');
       const cartItems = document.getElementById('cart-drawer-items');
       const cartEmpty = document.getElementById('cart-drawer-empty');
       const cartSubtotalValue = document.getElementById('cart-subtotal-value');
-      
+
       // Show loading overlay
       showCartLoading();
-      
+
       fetch('/cart.js')
-        .then(response => response.json())
-        .then(cart => {
+        .then((response) => response.json())
+        .then((cart) => {
           // Log the cart items to see their structure
           console.log('Cart contents:', cart);
           if (cart.items && cart.items.length > 0) {
@@ -2367,7 +2412,7 @@
           if (cartSubtotalValue) {
             cartSubtotalValue.textContent = formatMoney(cart.total_price);
           }
-          
+
           // Show/hide empty cart message
           if (cartItems && cartEmpty) {
             if (cart.item_count === 0) {
@@ -2376,54 +2421,53 @@
             } else {
               cartItems.style.display = 'block';
               cartEmpty.style.display = 'none';
-              
+
               // Render cart items
               cartItems.innerHTML = '';
               cart.items.forEach((item, index) => {
                 // Add the index to the item object for reliable identification
                 item.index = index;
-                
+
                 const itemElement = createCartItemElement(item);
-                
+
                 // If this is a new item and it's the first item in the cart
                 // or if we're specifically flagging this as a new item, add animation
-                if ((isNewItem && index === 0) || 
-                    (cart.items.length === 1 && item.quantity === 1)) {
+                if ((isNewItem && index === 0) || (cart.items.length === 1 && item.quantity === 1)) {
                   itemElement.classList.add('cart-drawer__add-animation');
                 }
-                
+
                 cartItems.appendChild(itemElement);
               });
             }
           }
-          
+
           // Hide loading overlay
           hideCartLoading();
         })
-        .catch(error => {
+        .catch((error) => {
           console.error('Error fetching cart:', error);
           // Hide loading overlay even on error
           hideCartLoading();
         });
     }
-    
+
     // Create cart item element
     function createCartItemElement(item) {
       // Log item details to see what we're working with
       console.log('Creating item element with data:', item);
-      
+
       const itemDiv = document.createElement('div');
       itemDiv.className = 'cart-drawer__item';
-      
+
       // Store the line item key as a data attribute for later use
       if (item.key) {
         itemDiv.setAttribute('data-item-key', item.key);
       }
-      
+
       // Image
       const img = document.createElement('img');
       img.className = 'cart-drawer__item-image';
-      
+
       // Try to get the featured image URL from the item
       if (item.featured_image) {
         img.src = item.featured_image.url;
@@ -2432,18 +2476,18 @@
       } else {
         img.src = 'https://via.placeholder.com/80';
       }
-      
+
       img.alt = item.title;
-      
+
       // Details container
       const details = document.createElement('div');
       details.className = 'cart-drawer__item-details';
-      
+
       // Title
       const title = document.createElement('div');
       title.className = 'cart-drawer__item-title';
       title.textContent = item.title;
-      
+
       // Variant
       if (item.variant_title) {
         const variant = document.createElement('div');
@@ -2451,16 +2495,16 @@
         variant.textContent = item.variant_title;
         details.appendChild(variant);
       }
-      
+
       // Price
       const price = document.createElement('div');
       price.className = 'cart-drawer__item-price';
       price.textContent = formatMoney(item.price);
-      
+
       // Quantity
       const quantity = document.createElement('div');
       quantity.className = 'cart-drawer__item-quantity';
-      
+
       const minusBtn = document.createElement('button');
       minusBtn.className = 'cart-drawer__item-quantity-button';
       minusBtn.textContent = '-';
@@ -2469,7 +2513,7 @@
       // 2. Use zero-based index if we have it
       // 3. Fall back to variant ID
       let itemIdentifier;
-      
+
       if (item.key) {
         itemIdentifier = item.key;
       } else if (typeof item.index !== 'undefined') {
@@ -2482,36 +2526,36 @@
         itemIdentifier = item.id;
       }
       minusBtn.setAttribute('data-id', itemIdentifier);
-      minusBtn.addEventListener('click', function() {
+      minusBtn.addEventListener('click', function () {
         updateItemQuantity(itemIdentifier, item.quantity - 1);
       });
-      
+
       const qtyInput = document.createElement('input');
       qtyInput.className = 'cart-drawer__item-quantity-input';
       qtyInput.type = 'text';
       qtyInput.value = item.quantity;
       qtyInput.readOnly = true;
-      
+
       const plusBtn = document.createElement('button');
       plusBtn.className = 'cart-drawer__item-quantity-button';
       plusBtn.textContent = '+';
       plusBtn.setAttribute('data-id', itemIdentifier);
-      plusBtn.addEventListener('click', function() {
+      plusBtn.addEventListener('click', function () {
         updateItemQuantity(itemIdentifier, item.quantity + 1);
       });
-      
+
       quantity.appendChild(minusBtn);
       quantity.appendChild(qtyInput);
       quantity.appendChild(plusBtn);
-      
+
       // Remove button
       const removeBtn = document.createElement('button');
       removeBtn.className = 'cart-drawer__item-remove';
       removeBtn.setAttribute('data-id', itemIdentifier);
-      removeBtn.addEventListener('click', function() {
+      removeBtn.addEventListener('click', function () {
         updateItemQuantity(itemIdentifier, 0);
       });
-      
+
       // Add remove icon
       const removeIcon = document.createElement('span');
       removeIcon.className = 'cart-drawer__item-remove-icon';
@@ -2519,37 +2563,36 @@
         <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>`;
-      
+
       removeBtn.appendChild(removeIcon);
       removeBtn.appendChild(document.createTextNode('Remove'));
-      
-      
+
       // Append all elements
       details.appendChild(title);
       details.appendChild(price);
       details.appendChild(quantity);
       details.appendChild(removeBtn);
-      
+
       itemDiv.appendChild(img);
       itemDiv.appendChild(details);
-      
+
       return itemDiv;
     }
-    
+
     // Update item quantity
     function updateItemQuantity(id, quantity) {
       console.log('Updating item, ID format:', id, 'type:', typeof id);
-      
+
       // Show loading overlay
       showCartLoading();
-      
+
       // The API expects a few formats:
       // 1. Line item key (preferred) like: '43599a3726hjk34k55::shop.myshopify.com::1234567890'
       // 2. Variant ID as a string
-      
+
       // Create the payload based on what we have
       let payload = { quantity: quantity };
-      
+
       // For the Shopify Cart API in newer versions:
       // 1. If we have the line_item key - use it directly
       if (typeof id === 'string' && id.includes('::')) {
@@ -2563,81 +2606,81 @@
       else if (!isNaN(parseInt(id)) && String(parseInt(id)) === String(id)) {
         payload.line = parseInt(id) + 1; // Line items are 1-indexed in the API
       }
-      // 4. Last resort - try using it as a variant ID 
+      // 4. Last resort - try using it as a variant ID
       else {
         payload.id = String(id);
       }
-      
+
       console.log('Sending payload:', payload);
-      
+
       fetch('/cart/change.js', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       })
-      .then(response => {
-        if (!response.ok) {
-          // If response is not OK, try to parse error message
-          return response.json().then(errorData => {
-            console.error('Cart update failed with status:', response.status, errorData);
-            throw new Error(`Cart update failed: ${errorData.message || 'Unknown error'}`);
-          });
-        }
-        return response.json();
-      })
-      .then(cart => {
-        // Successful update
-        console.log('Cart updated successfully:', cart);
-        updateCartCount();
-        updateCartContents();
-        // No need to hide loading here as updateCartContents will do it
-      })
-      .catch(error => {
-        console.error('Error updating cart:', error);
-        // Refresh the cart anyway to ensure UI is in sync
-        updateCartContents();
-        // No need to hide loading here as updateCartContents will do it
-      });
+        .then((response) => {
+          if (!response.ok) {
+            // If response is not OK, try to parse error message
+            return response.json().then((errorData) => {
+              console.error('Cart update failed with status:', response.status, errorData);
+              throw new Error(`Cart update failed: ${errorData.message || 'Unknown error'}`);
+            });
+          }
+          return response.json();
+        })
+        .then((cart) => {
+          // Successful update
+          console.log('Cart updated successfully:', cart);
+          updateCartCount();
+          updateCartContents();
+          // No need to hide loading here as updateCartContents will do it
+        })
+        .catch((error) => {
+          console.error('Error updating cart:', error);
+          // Refresh the cart anyway to ensure UI is in sync
+          updateCartContents();
+          // No need to hide loading here as updateCartContents will do it
+        });
     }
-    
+
     // Format money helper
     function formatMoney(cents) {
       const formatOptions = {
         style: 'currency',
-        currency: Shopify.currency.active || 'USD'
+        currency: Shopify.currency.active || 'USD',
       };
       return (cents / 100).toLocaleString(undefined, formatOptions);
     }
-    
+
     // Listen for cart updates (using Shopify's cart change event)
     document.addEventListener('cart:refresh', handleCartUpdate);
     document.addEventListener('cart:change', handleCartUpdate);
     document.addEventListener('cart:updated', handleCartUpdate);
-    
+
     // Combined handler for cart updates
     function handleCartUpdate(event) {
       updateCartCount();
-      
+
       // If cart drawer is active, update its contents
       if (cartDrawer && cartDrawer.classList.contains('active')) {
         updateCartContents();
       }
-      
+
       // If this was an add event, open the cart drawer
       if (event && event.detail && event.detail.source === 'product-form') {
         openCartDrawer(true);
       }
     }
-    
+
     // Make cart drawer functions available globally
     window.openCartDrawer = openCartDrawer;
-  window.closeCartDrawer = closeCartDrawer;
+    window.closeCartDrawer = closeCartDrawer;
 
-  // Also update on page load
-  updateCartCount();
-    
+    // Also update on page load
+    updateCartCount();
+
     // Function to update the cart count
     function updateCartCount() {
       fetch('/cart.js')
